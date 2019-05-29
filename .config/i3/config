@@ -1,0 +1,228 @@
+# GENERAL
+# set variables
+set $term urxvt
+set $mpdhost $HOME/.local/run/mpd.socket
+set $c_mon="HDMI-1-2"
+set $l_mon="eDP-1-1"
+# set modifier
+set $super Mod4
+set $alt Mod1
+# Use Mouse+$super to drag floating windows to their wanted position
+floating_modifier $super
+# ---------------------------
+
+
+# AUTOSTART
+exec --no-startup-id ~/.local/sh/xrndr.sh
+
+exec --no-startup-id compton -bc --config ~/.config/compton/config
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
+exec --no-startup-id redshift
+exec --no-startup-id ~/.local/sh/xkbr.sh
+
+exec_always ~/.fehbg
+exec_always ~/.config/polybar/launch.sh
+# ---------------------------
+
+# MANAGE MONITORS (need some sort of sh script to generate settings from a template
+# jinja2 templates? Currently it should cover i3, polybar and xrandr settings)
+workspace 1 output $l_mon
+workspace 2 output $c_mon $l_mon
+workspace 3 output $c_mon $l_mon
+workspace 4 output $c_mon $l_mon
+workspace 5 output $c_mon $l_mon
+workspace 6 output $c_mon $l_mon
+workspace 7 output $c_mon $l_mon
+workspace 8 output $c_mon $l_mon
+workspace 9 output $c_mon $l_mon
+
+# idk workspace to monitor binding is buggy? It does not work right
+# after startup, sometimes monitor on the left takes 3rd workspace or 1st,
+# annoying, dk how to fix
+exec --no-startup-id ~/.local/sh/xrndr.sh
+# ---------------------------
+
+
+# KEYBINDINGS
+# super group
+bindsym $super+q kill
+bindsym $alt+F4 kill
+bindsym $super+Return exec $term
+bindsym $super+d exec ~/.config/polybar/scripts/launcher-alt
+# change focus
+bindsym $super+h focus left
+bindsym $super+j focus down
+bindsym $super+k focus up
+bindsym $super+l focus right
+# layout
+bindsym $super+f fullscreen toggle
+bindsym $super+s layout toggle split
+# nav
+bindsym $super+1 workspace1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+bindsym $super+7 workspace 7
+bindsym $super+8 workspace 8
+bindsym $super+9 workspace 9
+
+
+# super Shift group
+# nav
+bindsym $super+Shift+h move left
+bindsym $super+Shift+j move down
+bindsym $super+Shift+k move up
+bindsym $super+Shift+l move right
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace 1
+bindsym $super+Shift+2 move container to workspace 2
+bindsym $super+Shift+3 move container to workspace 3
+bindsym $super+Shift+4 move container to workspace 4
+bindsym $super+Shift+5 move container to workspace 5
+bindsym $super+Shift+6 move container to workspace 6
+# sh
+bindsym $super+Shift+a exec ~/.config/polybar/scripts/audiodevice.sh
+bindsym $super+Shift+w exec ~/.config/polybar/scripts/wifi.sh
+# apps
+bindsym $super+Shift+b exec google-chrome
+bindsym $super+Shift+t exec env XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
+bindsym $super+Shift+s exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+bindsym $super+Shift+c exec code
+bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+# i3 misc
+bindsym $super+Shift+r restart
+
+# super alt group
+bindsym $super+$alt+h split h
+bindsym $super+$alt+v split v
+
+
+# fn group
+bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+bindsym XF86AudioNext exec mpc --host $mpdhost next
+bindsym XF86AudioPrev exec mpc --host $mpdhost prev
+bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
+bindsym XF86AudioStop exec mpc --host $mpdhost stop
+
+# single key group
+bindsym Print exec scr.sh
+
+# ---------------------------
+
+
+# MODES
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  bindsym Left resize shrink width 5 px or 5 ppt
+  bindsym Down resize grow height 5 px or 5 ppt
+  bindsym Up resize shrink height 5 px or 5 ppt
+  bindsym Right resize grow width 5 px or 5 ppt
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+bindsym $super+r mode "resize"
+bindsym $super+Pause exec ~/.config/polybar/scripts/powermenu
+# Power
+#set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+#mode "$mode_system" {
+#    bindsym l exec --no-startup-id i3-exit.sh lock, mode "default"
+#    bindsym e exec --no-startup-id i3-exit.sh logout, mode "default"
+#    bindsym s exec --no-startup-id i3-exit.sh suspend, mode "default"
+#    bindsym h exec --no-startup-id i3-exit.sh hibernate, mode "default"
+#    bindsym r exec --no-startup-id i3-exit.sh reboot, mode "default"
+#    bindsym Shift+s exec --no-startup-id i3-exit.sh shutdown, mode "default"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+#bindsym $super+Pause mode "$mode_system"
+# ---------------------------
+
+# GAPS MODE
+bindsym $super+Shift+g mode "gaps"
+mode "gaps" {
+  bindsym o mode "gaps outer"
+  bindsym i mode "gaps inner"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+mode "gaps inner" {
+  bindsym plus  gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+  bindsym 0     gaps inner current set 0
+ 
+  bindsym Shift+plus  gaps inner all plus 5
+  bindsym Shift+minus gaps inner all minus 5
+  bindsym Shift+0     gaps inner all set 0
+ 
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+mode "gaps outer" {
+  bindsym plus  gaps outer current plus 5
+  bindsym minus gaps outer current minus 5
+  bindsym 0     gaps outer current set 0
+ 
+  bindsym Shift+plus  gaps outer all plus 5
+  bindsym Shift+minus gaps outer all minus 5
+  bindsym Shift+0     gaps outer all set 0
+ 
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# ---------------------------
+
+# FLOATING WINDOW MOVE MODE
+bindsym $super+m mode "move" focus floating
+mode "move" {
+    bindsym $mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym h     move left
+    bindsym j     move down
+    bindsym k     move up
+    bindsym l     move right
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#----------------------------
+
+
+# RULES PER WINDOW
+# window rules, you can find the window class using xprop
+for_window [class=".*"] border pixel 2
+for_window [class=Lxappearance|Eog|Gnome-disks|Gpick] floating enable
+for_window [class=libreoffice*|Gimp*|Inkscape|Lxappearance|GParted|discord|TelegramDesktop|TeamSpeak*|Gnome-disks] focus
+for_window [class=TelegramDesktop|Gnome-disks] resize set 540 650
+for_window [class=TeamSpeak*] resize set 540 850
+for_window [class=TelegramDesktop|Gnome-disks] move position center
+for_window [class=TeamSpeak*] move position center
+# ---------------------------
+
+
+# GAPS
+gaps top 0
+gaps inner 5
+new_window none
+# ---------------------------
+
+
+# COLORS
+# colour of               border, background, text,   indicator,  child_border
+client.focused          #d81b60   #000000     #FFFFFF   #000000   #d81b60
+client.focused_inactive #222222   #5F676A     #FFFFFF   #5F676A   #5F676A
+client.unfocused        #333333   #222222     #888888   #222222   #333333
+client.urgent           #222222   #900000     #FFFFFF   #900000   #222222
+client.placeholder      #000000   #0C0C0C     #FFFFFF   #0C0C0C   #000000
+client.background       #000000
+# ---------------------------
