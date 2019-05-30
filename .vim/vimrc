@@ -1,154 +1,177 @@
-"
-" Setup vim environment
-"
+" DEFAULT --------------------------------------------------------------------
+" ----------------------------------------------------------------------------
+set number
+set t_CO=256
+set tabstop=4 
+set softtabstop=0 
+set expandtab 
+set shiftwidth=4 
+set smarttab
+set ls=2
 set nocompatible
+filetype off
+let python_highlight_all=1
+syntax on
+set backspace=2
+set clipboard=unnamedplus
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
-set runtimepath^=$HOME/.vim
-set runtimepath^=$HOME/.vim/after
-set runtimepath^=$HOME/.vim/autoload
-set runtimepath^=$HOME/.vim/contrib
-set runtimepath^=$HOME/.vim/plugin
-set runtimepath^=/usr/share/vim/vimfiles/eclim
+" VUNDLE ------------------------------------------------------------
+" -------------------------------------------------------------------
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+" PLUGINS
 
-call plug#begin(expand('$HOME/.vim/contrib'))
+" Nav
+Plugin 'ctrlpvim/ctrlp.vim'
 
-Plug 'junegunn/vim-plug'
+" HTML, XML
+Plugin 'jiangmiao/auto-pairs'           " Auto pair insert
+Plugin 'alvan/vim-closetag'             " Auto close html tags
 
-Plug 'Shougo/vimshell', { 'rev': '3787e5' }
+" Javascript
+Plugin 'pangloss/vim-javascript'
+Plugin 'leshill/vim-json'
 
-"Plug 'Shougo/neosnippet.vim' " Snippet engine
-"Plug 'Shougo/neosnippet-snippets' " Repository of snippets
+" Misc
+Plugin 'tpope/vim-fugitive'             " Git wrapper
 
-if has('python') || has('python3')
-  Plug 'SirVer/ultisnips' " Snippet engine
-  Plug 'honza/vim-snippets' " Repository of snippets
-  Plug 'Valloric/YouCompleteMe'
+" Appearance
+Plugin 'flazz/vim-colorschemes'         " Colorscheme manager
+Plugin 'joshdick/onedark.vim'           " Colorscheme
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes' 
+
+" GO
+Plugin 'fatih/vim-go'
+Plugin 'shougo/deoplete.nvim'
+
+" REACT
+Plugin 'mxw/vim-jsx'
+
+" /PLUGINS
+call vundle#end()
+filetype indent plugin on
+
+
+" DEOPLETE ----------------------------------------------------------
+" -------------------------------------------------------------------
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" CTRLP -------------------------------------------------------------
+" -------------------------------------------------------------------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+
+" VIM-COLORSCHEME ---------------------------------------------------
+" -------------------------------------------------------------------
+colorscheme onedark
+
+
+" VIM-CLOSETAG ------------------------------------------------------
+" -------------------------------------------------------------------
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js"
+
+
+" VIM-AIRLIN --------------------------------------------------------
+" -------------------------------------------------------------------
+set laststatus=2
+let g:airline_theme='atomic'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+set guifont=DejaVu\ Sans:s12
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
 endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
-" dlang.org
-"Plug 'Shougo/vimproc.vim'
-"Plug 'idanarye/vim-vebugger'
-"Plug 'idanarye/vim-dutyl'
 
-Plug 'ervandew/supertab'
+" Key Remaps --------------------------------------------------------
+" -------------------------------------------------------------------
+" Split view key remap
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+"Ctrl-k move to the split above
+"Ctrl-l move to the split to the right
+"Ctrl-h move to the split to the left
 
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'zchee/deoplete-clang'
-" Plug 'Rip-Rip/clang_complete'
-"Plug 'zchee/deoplete-go'
-"Plug 'zchee/deoplete-go', { 'do': 'make'}
-"Plug 'zchee/deoplete-jedi' " python
-" Requires: github.com/davidhalter/jedi
-"Plug 'zchee/deoplete-zsh'
+map <C-q> :bd<CR>
+map <C-c> :qa!<CR>
 
-Plug 'artur-shaik/vim-javacomplete2'
+" Save on ctrl s
+nmap <c-s> :w<CR>
+imap <c-s> <Esc>:w<CR>a
 
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sleuth'
-"Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-abolish'
+" File specific setups ----------------------------------------------
+" -------------------------------------------------------------------
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
 
-" C/C++
-Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'derekwyatt/vim-fswitch'
-" Plug 'vim-scripts/OmniCppComplete'
+au BufNewFile,BufRead *.js,*.jsx,*.html,*.css,*.less
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
 
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
 
-Plug 'ctrlp.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic' " Syntax checker
-"Plug 'terryma/vim-multiple-cursors'
-"Plug 'rstacruz/sparkup', {'rtp': 'vim/'} " Write fast html/css
-Plug 'tomtom/tcomment_vim'
-Plug 'majutsushi/tagbar'
-"Plug 'Raimondi/delimitMate'
-"Plug 'groenewege/vim-less'
-"Plug 'othree/html5.vim'
-"Plug 'kchmck/vim-coffee-script'
-Plug 'baskerville/vim-sxhkdrc'
-"Plug 'vim-perl/vim-perl'
-"Plug 'fatih/vim-go'
-"Plug 'syngan/vim-vimlint'
-"Plug 'ynkdir/vim-vimlparser'
-"Plug 'blueyed/vim-diminactive'
 
-Plug 'airblade/vim-gitgutter'
+" Scripts -----------------------------------------------------------
+" -------------------------------------------------------------------
+" Prompt to create a directory if not exist
+augroup vimrc-auto-mkdir
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)
+    if !isdirectory(a:dir)
+          \   && (a:force
+          \       || input("'" . a:dir . "' does not exist. Create? [y/N]") =~? '^y\%[es]$')
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction
+augroup END
 
-"Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'suan/vim-instant-markdown'
-Plug 'nelstrom/vim-markdown-folding'
-
-Plug 'jeetsukumaran/vim-buffergator'
-"Plug 'szw/vim-ctrlspace'
-"Plug 't9md/vim-choosewin'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'paranoida/vim-airlineish'
-
-Plug 'tomtom/tlib_vim'
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'unblevable/quick-scope'
-
-Plug 'chrisbra/Colorizer'
-Plug 'ap/vim-css-color'
-Plug 'KabbAmine/vCoolor.vim'
-
-"Plug 'MattesGroeger/vim-bookmarks'
-
-"Plug 'tek/proteome.nvim' (doesn't work - fix the remote host stuff)
-Plug 'amix/vim-zenroom2'
-Plug 'junegunn/goyo.vim'
-Plug 'risus/vim-brogrammer-theme'
-Plug 'MvanDiemen/ghostbuster'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'roosta/srcery'
-Plug 'dracula/vim'
-Plug 'joshdick/onedark.vim'
-Plug 'delehef/Apprentice'
-
-Plug 'daylerees/colour-schemes', { 'rtp': 'vim/' }
-"Plug 'baeuml/summerfruit256.vim'
-Plug 'chriskempson/base16-vim'
-"Plug 'mkarmona/colorsbox'
-"Plug 'KabbAmine/yowish.vim'
-Plug 'flazz/vim-colorschemes'
-"Plug 'edkolev/promptline.vim'
-"Plug 'morhetz/gruvbox'
-Plug 'ScrollColors'
-
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'chrisbra/unicode.vim'
-"Plug 'mhinz/vim-startify'
-
-Plug 'sheerun/vim-polyglot'
-Plug 'vhdirk/vim-cmake'
-Plug 'dpwright/vim-tup'
-
-Plug 'lekv/vim-clewn'
-
-"Plug 'vim-scripts/Conque-GDB'
-"Plug 'critiqjo/lldb.nvim'
-
-Plug 'kassio/neoterm'
-
-Plug 'rhysd/vim-clang-format'
-
-"Plug 'wesQ3/vim-windowswap'
-
-call plug#end()
-
-filetype plugin indent on
-
-" Source configurations
-for g:rc in split(glob('$HOME/.vim/vimrc.d/*.vim'), '\n')
-  exe 'source' rc
-endfor
-
-" Source plugin configurations
-for g:rc in split(glob('$HOME/.vim/vimrc.d/plugins/*.vim'), '\n')
-  exe 'source' rc
-endfor
+" Misc --------------------------------------------------------------
+" -------------------------------------------------------------------
+" Global buffer Visual Mode
+set guioptions+=a

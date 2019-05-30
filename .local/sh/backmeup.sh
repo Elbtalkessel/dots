@@ -7,14 +7,14 @@ backup() {
 
   while read f
   do
-    if [ -f "$f" ]
+    if [ -f "$f" ] || [ -d "$f" ]
     then
-      cp -v $f ${DIR}/
+      cp -r -v $f ${DIR}/
     elif [ -z "$f" ]
     then
       break
     else
-      echo "$f not a file"
+      echo "$f not a file or a dir"
     fi
   done
 }

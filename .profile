@@ -21,7 +21,6 @@ export POLYBAR_HOME="${XDG_CONFIG_HOME}/polybar"
 export GOPATH="${HOME}/.go"
 export GOBIN="${GOPATH}/bin"
 export GOBIN_SYS="/usr/local/go/bin"
-export GIMP2_DIRECTORY="${XDG_CONFIG_HOME}/gimp"
 
 export MUSIC="${HOME}/Music"
 export WALLPAPERS="${HOME}/Pictures"
@@ -42,7 +41,6 @@ export LESS="-g -i -M -R -S -w -K -z-4 --lesskey-file=${XDG_CONFIG_HOME}/lesskey
 export LESSHISTFILE="${XDG_CACHE_HOME}/.lesshst"
 export GREP_COLORS="mt=30;43"
 
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME}/notmuch/config"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
 export WINEPREFIX="${XDG_DATA_HOME}/wine"
 export NO_AT_BRIDGE=1
@@ -57,30 +55,15 @@ path_prepend() {
   esac
 }
 
-[ -d "$LOCAL_BIN" ] && {
-  for dir in "$LOCAL_BIN"/* "$LOCAL_BIN"; do
-    [ -d "$dir" ] && path_prepend "$dir"
-  done
-}
-
 path_prepend ${LOCAL_SH}
 path_prepend ${GOBIN}
 path_prepend ${GOBIN_SYS}
 
+
 unset dir
 unset -f path_prepend
 
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin"
-export MANPATH="$MANPATH:/usr/local/share/man:/usr/share/man"
+export PATH=$PATH
 
 export XDG_RUNTIME_DIR=/run/user/`id -u`
 
-
-
-# Node Version Manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# virtualenvwrapper
-export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh

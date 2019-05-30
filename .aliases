@@ -56,4 +56,6 @@ alias egrep="egrep --color=auto"
 
 alias adb="sudo adb"
 
+alias nodejs="node"
+
 # vim:ft=sh

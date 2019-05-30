@@ -94,9 +94,9 @@ bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:si
 # i3 misc
 bindsym $super+Shift+r restart
 
-# super alt group
-bindsym $super+$alt+h split h
-bindsym $super+$alt+v split v
+# super arrow group
+bindsym $super+Down split v
+bindsym $super+Right split h
 
 
 # fn group
