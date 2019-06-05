@@ -3,4 +3,4 @@
 *.pyc
 *.o
 *.log
-
+.netrwhist

@@ -1,34 +1,28 @@
-! === vars ===
-#define $TERM urxvt
-#define $BACKGROUND #2f343f
-#define $ACCENT #bf616a
-#define $TEXT #d8dee8
-#define $WARNING #ebcb8b
+! -----------------------------------------------------------------------------
+! GENERAL
+! -----------------------------------------------------------------------------
+*.PMON: HDMI-1-2
+*.SMON: eDP-1-1
+*.TERM: urxvt
+*.MPDS: .local/run/mpd.socket
 
-! ------------------------------------------------------------------------------
-! ROFI Color theme
-! ------------------------------------------------------------------------------
-! rofi.color-enabled: true
-! rofi.color-window: #510231, #510231, #FF974E
-! rofi.color-normal: #510231, #FEE8DA, #510231, #FF974E, #510231
-! rofi.color-active: #510231, #FEE8DA, #510231, #FF974E, #510231
-! rofi.color-urgent: #510231, #FA6E43, #510231, #FA6E43, #FEE8DA
-
-
+! -----------------------------------------------------------------------------
+! Color theme
+! -----------------------------------------------------------------------------
 ! black
-*.color0  : #2e282e
-*.color8  : #403741
+*.color0  : #222222
+*.color8  : #333333
 
 ! red
-*.color1  : #457ac4
+*.color1  : #d81b60
 *.color9  : #CA407E
 
-! green
-*.color2  : #a8aabd
-*.color10 : #a8aabd
+! gray
+*.color2  : #5F676A
+*.color10 : #888888
 
-! yellow
-*.color3  : #95ee8f
+! green
+*.color3  : #2F343F
 *.color11 : #95ee8f
 
 ! blue
@@ -45,9 +39,12 @@
 
 ! white
 *.color7  : #E8E2DB
-*.color15 : #F7EDE2
+*.color15 : #D8DEE8
 
 
+! -----------------------------------------------------------------------------
+! ROFI
+! -----------------------------------------------------------------------------
 ! Sizes
 rofi.width:           60
 rofi.columns:         3
@@ -63,9 +60,10 @@ rofi.color-normal:    #2f343f,  #d8dee8,  #2f343f,  #2f343f,  #bf616a
 !                     bg,           border
 rofi.color-window:    #2f343f,  #bf616a
 ! === endrofi ===
-!
-!
 
+!-------------------------------------------------------------------------------
+! I3 settings
+! ------------------------------------------------------------------------------
 
 !-------------------------------------------------------------------------------
 ! Xft settings
@@ -94,8 +92,8 @@ URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
 ! Fonts
-URxvt*font: xft:Roboto Mono Light for Powerline:style=Light,Regular:size=12
-URxvt*boldFont: xft:Roboto Mono for Powerline:style=Bold:size=12,
+URxvt*font: xft:Fira Code:style=Light:size=12
+URxvt*boldFont: xft:Fira Code:style=Medium:size=12
 
 ! Fix font space
 URxvt*letterSpace: 0

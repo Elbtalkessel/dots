@@ -31,7 +31,7 @@ export ARCH="x86_64"
 export ARCHFLAGS="-arch x86_64"
 
 export LANG="en_US.UTF-8"
-export BROWSER="google-chrome"
+export BROWSER="qutebrowser"
 export EDITOR="nvim"
 export VISUAL="nvim"
 

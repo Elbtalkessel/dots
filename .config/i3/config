@@ -1,24 +1,39 @@
+# ---------------------------
 # GENERAL
-# set variables
-set $term urxvt
-set $mpdhost $HOME/.local/run/mpd.socket
-set $c_mon="HDMI-1-2"
-set $l_mon="eDP-1-1"
-# set modifier
+# ---------------------------
+# path
+set $mpds_fallback $HOME/.local/run/mpd.socket
+set $rofi_scripts  $HOME/.config/polybar/scripts
+set $sh_scripts    $LOCAL_SH
+# .Xresources
+set_from_resource $term     i3wm.TERM     urxvt
+set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
+set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
+set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
+set_from_resource $color0   i3wm.color0   #222222
+set_from_resource $color8   i3wm.color8   #333333
+set_from_resource $color1   i3wm.color1   #D81B60
+set_from_resource $color9   i3wm.color9   #CA407E
+set_from_resource $color2   i3wm.color2   #5F676A
+set_from_resource $color10  i3wm.color10  #888888
+set_from_resource $color7   i3wm.color7   #E8E2D8
+set_from_resource $color15  i3wm.color15  #D8DEE8
+# I3
 set $super Mod4
 set $alt Mod1
-# Use Mouse+$super to drag floating windows to their wanted position
+# Press super to move float
 floating_modifier $super
 # ---------------------------
 
 
+# ---------------------------
 # AUTOSTART
-exec --no-startup-id ~/.local/sh/xrndr.sh
+# ---------------------------
+exec --no-startup-id $sh_scripts/xrndr.sh
 
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
-exec --no-startup-id redshift
-exec --no-startup-id ~/.local/sh/xkbr.sh
+exec --no-startup-id $sh_scripts/xkbr.sh
 
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
@@ -39,16 +54,18 @@ workspace 9 output $c_mon $l_mon
 # idk workspace to monitor binding is buggy? It does not work right
 # after startup, sometimes monitor on the left takes 3rd workspace or 1st,
 # annoying, dk how to fix
-exec --no-startup-id ~/.local/sh/xrndr.sh
+exec --no-startup-id $sh_scripts/xrndr.sh
 # ---------------------------
 
 
+# ---------------------------
 # KEYBINDINGS
+# ---------------------------
 # super group
 bindsym $super+q kill
 bindsym $alt+F4 kill
 bindsym $super+Return exec $term
-bindsym $super+d exec ~/.config/polybar/scripts/launcher-alt
+bindsym $super+d exec $rofi_scripts/launcher-alt
 # change focus
 bindsym $super+h focus left
 bindsym $super+j focus down
@@ -68,7 +85,6 @@ bindsym $super+7 workspace 7
 bindsym $super+8 workspace 8
 bindsym $super+9 workspace 9
 
-
 # super Shift group
 # nav
 bindsym $super+Shift+h move left
@@ -83,8 +99,8 @@ bindsym $super+Shift+4 move container to workspace 4
 bindsym $super+Shift+5 move container to workspace 5
 bindsym $super+Shift+6 move container to workspace 6
 # sh
-bindsym $super+Shift+a exec ~/.config/polybar/scripts/audiodevice.sh
-bindsym $super+Shift+w exec ~/.config/polybar/scripts/wifi.sh
+bindsym $super+Shift+a exec $rofi_scripts/audiodevice.sh
+bindsym $super+Shift+w exec $rofi_scripts/wifi.sh
 # apps
 bindsym $super+Shift+b exec google-chrome
 bindsym $super+Shift+t exec env XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
@@ -98,7 +114,6 @@ bindsym $super+Shift+r restart
 bindsym $super+Down split v
 bindsym $super+Right split h
 
-
 # fn group
 bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
@@ -108,13 +123,15 @@ bindsym XF86AudioPrev exec mpc --host $mpdhost prev
 bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
 bindsym XF86AudioStop exec mpc --host $mpdhost stop
 
-# single key group
+# single and special keys group
 bindsym Print exec scr.sh
-
+bindsym $super+Pause exec $rofi_scripts/powermenu
 # ---------------------------
 
 
+# ---------------------------
 # MODES
+# ---------------------------
 # resize window (you can also use the mouse for that)
 mode "resize" {
   bindsym Left resize shrink width 5 px or 5 ppt
@@ -125,21 +142,6 @@ mode "resize" {
   bindsym Return mode "default"
 }
 bindsym $super+r mode "resize"
-bindsym $super+Pause exec ~/.config/polybar/scripts/powermenu
-# Power
-#set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-#mode "$mode_system" {
-#    bindsym l exec --no-startup-id i3-exit.sh lock, mode "default"
-#    bindsym e exec --no-startup-id i3-exit.sh logout, mode "default"
-#    bindsym s exec --no-startup-id i3-exit.sh suspend, mode "default"
-#    bindsym h exec --no-startup-id i3-exit.sh hibernate, mode "default"
-#    bindsym r exec --no-startup-id i3-exit.sh reboot, mode "default"
-#    bindsym Shift+s exec --no-startup-id i3-exit.sh shutdown, mode "default"
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
-#bindsym $super+Pause mode "$mode_system"
-# ---------------------------
 
 # GAPS MODE
 bindsym $super+Shift+g mode "gaps"
@@ -174,8 +176,6 @@ mode "gaps outer" {
   bindsym Escape mode "default"
 }
 
-# ---------------------------
-
 # FLOATING WINDOW MOVE MODE
 bindsym $super+m mode "move" focus floating
 mode "move" {
@@ -195,10 +195,12 @@ mode "move" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-#----------------------------
+# ---------------------------
 
 
+# ---------------------------
 # RULES PER WINDOW
+# ---------------------------
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 2
 for_window [class=Lxappearance|Eog|Gnome-disks|Gpick] floating enable
@@ -210,19 +212,23 @@ for_window [class=TeamSpeak*] move position center
 # ---------------------------
 
 
+# ---------------------------
 # GAPS
+# ---------------------------
 gaps top 0
 gaps inner 5
 new_window none
 # ---------------------------
 
 
+# ---------------------------
 # COLORS
-# colour of               border, background, text,   indicator,  child_border
-client.focused          #d81b60   #000000     #FFFFFF   #000000   #d81b60
-client.focused_inactive #222222   #5F676A     #FFFFFF   #5F676A   #5F676A
-client.unfocused        #333333   #222222     #888888   #222222   #333333
-client.urgent           #222222   #900000     #FFFFFF   #900000   #222222
-client.placeholder      #000000   #0C0C0C     #FFFFFF   #0C0C0C   #000000
+# ---------------------------
+# colour of             border    backgro     text       indicat   child_b
+client.focused          $color1   #000000     $color15   #000000   $color1
+client.focused_inactive $color0   $color2     $color15   $color2   $color2
+client.unfocused        $color8   $color0     $color10   $color0   $color8
+client.urgent           $color0   $color9     $color15   $color1   $color0
+client.placeholder      #000000   $color0     $color15   $color0   #000000
 client.background       #000000
 # ---------------------------

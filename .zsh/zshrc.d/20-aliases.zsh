@@ -15,6 +15,9 @@ alias termkill.polybar='killall -9 polybar'
 alias ed.i3="vi ${XDG_CONFIG_HOME}/i3/config"
 alias ed.polybar="vi ${POLYBAR_HOME}/config.ini"
 alias ed.profile="vi ~/.profile"
+alias ed.vimrc="vi ~/.vim/vimrc"
+alias ed.xres="vi ~/.Xresources"
+alias ed.aliases="vi ~/.zsh/zshrc.d/20-aliases.zsh && re.aliases"
 
 alias wg.down="sudo wg-quick down wg0"
 alias wg.up="sudo wg-quick up wg0"
@@ -26,11 +29,14 @@ alias go.vault='cd $VAULT'
 alias go.polybar="cd $POLYBAR_HOME"
 alias go.projects="cd ${HOME}/Projects"
 
-alias re.aliases="source ~/.aliases"
+alias re.aliases="source ~/.zsh/zshrc.d/20-aliases.zsh"
+alias re.xresources="xrdb ~/.Xresources"
 
 alias ex.music='ncmpcpp -b $XDG_CONFIG_HOME/ncmpcpp/bindings'
 alias ex.mail='neomutt'
 alias ex.jabber='profanity'
+
+alias dfh="df -h | grep -P \"^File|sd\" --color=never | awk 'NR<2{print \$0;next}{print \$0 | \"sort\"}'"
 
 alias vim="nvim"
 alias vi="nvim"
@@ -55,5 +61,7 @@ alias grep="grep -i --color=auto"
 alias egrep="egrep --color=auto"
 
 alias adb="sudo adb"
+
+alias nodejs="node"
 
 # vim:ft=sh

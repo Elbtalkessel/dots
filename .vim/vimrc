@@ -9,14 +9,15 @@ set shiftwidth=4
 set smarttab
 set ls=2
 set nocompatible
-filetype off
-let python_highlight_all=1
-syntax on
 set backspace=2
 set clipboard=unnamedplus
+set encoding=UTF-8
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
+filetype off
+let python_highlight_all=1
+syntax on
 
 " VUNDLE ------------------------------------------------------------
 " -------------------------------------------------------------------
@@ -47,14 +48,43 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " GO
 Plugin 'fatih/vim-go'
+
+" Async Completion Framework
 Plugin 'shougo/deoplete.nvim'
 
 " REACT
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
+
+" HEX COLORS
+Plugin 'chrisbra/Colorizer'
+
+Plugin 'prettier/vim-prettier', {
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'python',
+    \ 'html' ] }
 
 " /PLUGINS
 call vundle#end()
 filetype indent plugin on
+
+
+" VIM PRETTIER ------------------------------------------------------
+" -------------------------------------------------------------------
+imap <Leader>p <Esc>:Prettier<CR>
+
+
+" VIM JAVASCRIPT ----------------------------------------------------
+" -------------------------------------------------------------------
+let g:javascript_plugin_jsdoc = 1
 
 
 " DEOPLETE ----------------------------------------------------------
@@ -63,13 +93,20 @@ call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+
 " CTRLP -------------------------------------------------------------
 " -------------------------------------------------------------------
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules/*
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+  \ }
 
 
 " VIM-COLORSCHEME ---------------------------------------------------
@@ -88,9 +125,7 @@ set laststatus=2
 let g:airline_theme='atomic'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-set guifont=DejaVu\ Sans:s12
 let g:airline_powerline_fonts = 1
-
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -99,23 +134,31 @@ let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = 'EC'
+let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = ' NE'
 let g:airline_symbols.whitespace = 'Ξ'
-" airline symbols
-let g:airline_left_sep = ''
+
+" powerline symbols
+let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
+let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty = "⚡"
 
 " Key Remaps --------------------------------------------------------
 " -------------------------------------------------------------------
@@ -127,34 +170,32 @@ nnoremap <C-H> <C-W><C-H>
 "Ctrl-k move to the split above
 "Ctrl-l move to the split to the right
 "Ctrl-h move to the split to the left
+map <S-J> :bprev<CR>
+map <S-K> :bnext<CR>
+map <S-q> :bd<CR>
+map <S-c> :qa!<CR>
 
-map <C-q> :bd<CR>
-map <C-c> :qa!<CR>
-
-" Save on ctrl s
+" Save on ctrl s, exit on ctrl c
 nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
+map <c-c> :qa!<CR>
 
 " File specific setups ----------------------------------------------
 " -------------------------------------------------------------------
+au BufNewFile,BufRead *.*
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab | 
+    \ set autoindent |
+    \ set fileformat=unix
+
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
     \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
-
-au BufNewFile,BufRead *.js,*.jsx,*.html,*.css,*.less
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2 |
-
+    \ set fileformat=unix
 
 " Scripts -----------------------------------------------------------
 " -------------------------------------------------------------------
