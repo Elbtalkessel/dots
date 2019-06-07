@@ -17,7 +17,7 @@ alias ed.polybar="vi ${POLYBAR_HOME}/config.ini"
 alias ed.profile="vi ~/.profile"
 alias ed.vimrc="vi ~/.vim/vimrc"
 alias ed.xres="vi ~/.Xresources"
-alias ed.aliases="vi ~/.zsh/zshrc.d/20-aliases.zsh && re.aliases"
+alias ed.aliases="vi ~/.zsh/zshrc.d/03-aliases.zsh && re.aliases"
 
 alias wg.down="sudo wg-quick down wg0"
 alias wg.up="sudo wg-quick up wg0"
@@ -28,6 +28,7 @@ alias go.backups='cd $BACKUPS'
 alias go.vault='cd $VAULT'
 alias go.polybar="cd $POLYBAR_HOME"
 alias go.projects="cd ${HOME}/Projects"
+alias go.playground="cd ${HOME}/Projects/playground"
 
 alias re.aliases="source ~/.zsh/zshrc.d/20-aliases.zsh"
 alias re.xresources="xrdb ~/.Xresources"
