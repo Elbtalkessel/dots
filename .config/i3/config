@@ -10,6 +10,7 @@ set_from_resource $term     i3wm.TERM     urxvt
 set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
 set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
 set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
+set_from_resource $browser  i3wm.browser  "qutebrowser --enable-webengine-inspector"
 set_from_resource $color0   i3wm.color0   #222222
 set_from_resource $color8   i3wm.color8   #333333
 set_from_resource $color1   i3wm.color1   #D81B60
@@ -102,7 +103,7 @@ bindsym $super+Shift+6 move container to workspace 6
 bindsym $super+Shift+a exec $rofi_scripts/audiodevice.sh
 bindsym $super+Shift+w exec $rofi_scripts/wifi.sh
 # apps
-bindsym $super+Shift+b exec google-chrome
+bindsym $super+Shift+b exec $browser
 bindsym $super+Shift+t exec env XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
 bindsym $super+Shift+s exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
 bindsym $super+Shift+c exec code

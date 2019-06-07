@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
-#
-# Defines runtime environment
-#
+
 export LD_LIBRARY_PATH=/usr/lib/
 
 export LOCAL_ETC="${HOME}/.local/etc"
@@ -46,24 +44,11 @@ export WINEPREFIX="${XDG_DATA_HOME}/wine"
 export NO_AT_BRIDGE=1
 export QT_STYLE_OVERRIDE="GTK+"
 
-
-# Update PATH
-path_prepend() {
-  case ":$PATH:" in
-    *":$1:"*) return ;; # already added
-    *) PATH="$1:$PATH";;
-  esac
-}
-
-path_prepend ${LOCAL_SH}
-path_prepend ${GOBIN}
-path_prepend ${GOBIN_SYS}
-
-
-unset dir
-unset -f path_prepend
+path.add ${LOCAL_SH}
+path.add ${GOBIN}
+path.add ${GOBIN_SYS}
+path.add ${LOCAL_BIN}
 
 export PATH=$PATH
 
 export XDG_RUNTIME_DIR=/run/user/`id -u`
-
