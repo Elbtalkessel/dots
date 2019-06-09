@@ -52,8 +52,10 @@ Plugin 'fatih/vim-go'
 " Async Completion Framework
 Plugin 'shougo/deoplete.nvim'
 
-" REACT
+" JS
 Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'carlitux/deoplete-ternjs'       "JS autocomplete, deoplete dep and tern npm dep
+Plugin 'ternjs/tern_for_vim'
 
 " HEX COLORS
 Plugin 'chrisbra/Colorizer'
@@ -75,6 +77,16 @@ Plugin 'prettier/vim-prettier', {
 " /PLUGINS
 call vundle#end()
 filetype indent plugin on
+
+" TERN JS -----------------------------------------------------------
+" -------------------------------------------------------------------
+let g:deoplete#sources#ternjs#tern_bin = '/home/risus/.yarn/bin/tern'
+let g:deoplete#sources#ternjs#timeout = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#case_insensitive = 1
+let g:deoplete#sources#ternjs#filetypes = ['jsx', 'javascript.jsx', 'vue', 'js']
+let g:tern#command = ["/home/risus/.yarn/bin/tern"]
+let g:tern#arguments = ["--persistent"]
 
 
 " VIM PRETTIER ------------------------------------------------------

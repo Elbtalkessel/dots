@@ -6,6 +6,7 @@ alias S="sudo systemctl"
 alias s="sudo"
 alias .="source"
 alias fep="feh ${HOME}/Pictures"
+alias t="touch"
 
 alias externalip="curl -s checkip.dyndns.org | sed 's/[^0-9.]//g'"
 

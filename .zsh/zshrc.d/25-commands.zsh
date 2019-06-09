@@ -1,36 +1,3 @@
-function unicode {
-  printf "%b\n" "\U$(printf "%6s\n" "$1" | tr ' ' 0)"
-}
-
-function field {
-  tr -s ' ' | cut -d ${2:- } -f $1
-}
-
-function proc {
-  ps wwwaux | egrep --color=always "($1|%CPU)" | grep -v grep
-}
-
-
-function find-byname {
-  find ${2:-.} -name "*${1}*"
-}
-
-# List processes with most files open
-function list-open-files {
-  lsof | field 2 | uniq -c | sort -rn | head
-}
-
-function list-top-fsize {
-  test -e ${1:-.} && ls -1RhsQ ${1:-.}/* \
-    | sed -e "s/^ *//" \
-    | grep "^[0-9]" \
-    | sort -rh \
-    | head -${2-10} \
-    | sed 's/[^ ]*/\o033[36;1m\0\o033[0m/' \
-    | xargs printf "%20s │ %s\n"
-}
-
-
 function zsh-colors {
   for code in {000..255}; do
     print -P -- "$code: %F{$code}Test%f";
@@ -45,6 +12,19 @@ function icons {
   esac
 }
 
-function show {
-  nohup nautilus $1 &
+function proc.who {
+  if [ -z $1 ]
+  then
+    echo "usage: proc.who <user|pid|command>"
+    return 2
+  fi
+  local fsc=`echo $1 | cut -c1-1`
+  local rsc=`echo $1 | cut -c2-`
+  local val=$(ps -eo user,pid,comm | grep -P "^USER|[$fsc]$rsc" --color=none)
+  echo $val
+  if [ "$2" = '-c' ]
+  then
+    echo $val | awk "NR==2" | grep -Po "\d+" | xclip -selection clipboard
+    echo "PID copied"
+  fi
 }

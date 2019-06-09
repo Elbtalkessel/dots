@@ -1,16 +1,6 @@
 /*-*- mode: css; -*-*/
 
 /*
-#--$name: rofi.rasi
-*/
-
-configuration {
-  display-drun: "run";
-  display-combi: "combi";
-	show-icons:  true;
-  font: "Monaco for Powerline 12";
-}
-/*
  * ROFI One Dark
  *
  * Based on OneDark.vim (https://github.com/joshdick/onedark.vim)
@@ -20,6 +10,11 @@ configuration {
  *
  */
 
+configuration {
+  display-drun: "(";
+  display-combi: "combi";
+	show-icons:  true;
+}
 
 * {
   black:      #000000;
@@ -38,7 +33,7 @@ configuration {
   spacing: 0;
   background-color: transparent;
 
-  font: "Knack Nerd Font 14";
+  font: "Fira Code";
   text-color: @text;
 }
 
