@@ -4,7 +4,7 @@
 # path
 set $mpds_fallback $HOME/.local/run/mpd.socket
 set $rofi_scripts  $HOME/.config/polybar/scripts
-set $sh_scripts    $LOCAL_SH
+set $sh_scripts    $HOME/.local/sh
 # .Xresources
 set_from_resource $term     i3wm.TERM     urxvt
 set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
@@ -125,7 +125,7 @@ bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
 bindsym XF86AudioStop exec mpc --host $mpdhost stop
 
 # single and special keys group
-bindsym Print exec scr.sh
+bindsym Print exec $sh_scripts/scr.sh
 bindsym $super+Pause exec $rofi_scripts/powermenu
 # ---------------------------
 

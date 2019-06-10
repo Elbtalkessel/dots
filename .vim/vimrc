@@ -82,7 +82,7 @@ filetype indent plugin on
 " -------------------------------------------------------------------
 let g:deoplete#sources#ternjs#tern_bin = '/home/risus/.yarn/bin/tern'
 let g:deoplete#sources#ternjs#timeout = 1
-let g:deoplete#sources#ternjs#docs = 1
+"let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#case_insensitive = 1
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'javascript.jsx', 'vue', 'js']
 let g:tern#command = ["/home/risus/.yarn/bin/tern"]
