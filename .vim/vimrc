@@ -18,7 +18,6 @@ vnoremap <F1> <ESC>
 filetype off
 let python_highlight_all=1
 syntax on
-
 " VUNDLE ------------------------------------------------------------
 " -------------------------------------------------------------------
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -32,6 +31,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " HTML, XML
 Plugin 'jiangmiao/auto-pairs'           " Auto pair insert
 Plugin 'alvan/vim-closetag'             " Auto close html tags
+Plugin 'mattn/emmet-vim'
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
@@ -49,17 +49,13 @@ Plugin 'vim-airline/vim-airline-themes'
 " GO
 Plugin 'fatih/vim-go'
 
-" Async Completion Framework
-Plugin 'shougo/deoplete.nvim'
-
-" JS
-Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'carlitux/deoplete-ternjs'       "JS autocomplete, deoplete dep and tern npm dep
-Plugin 'ternjs/tern_for_vim'
+" JS/JSX
+Plugin 'mxw/vim-jsx'
 
 " HEX COLORS
 Plugin 'chrisbra/Colorizer'
 
+" CODE FORAMTTING
 Plugin 'prettier/vim-prettier', {
   \ 'for': [
     \ 'javascript',
@@ -74,19 +70,14 @@ Plugin 'prettier/vim-prettier', {
     \ 'python',
     \ 'html' ] }
 
+" CODE COMPLETION
+Plugin 'Valloric/YouCompleteMe'
+
+
+
 " /PLUGINS
 call vundle#end()
 filetype indent plugin on
-
-" TERN JS -----------------------------------------------------------
-" -------------------------------------------------------------------
-let g:deoplete#sources#ternjs#tern_bin = '/home/risus/.yarn/bin/tern'
-let g:deoplete#sources#ternjs#timeout = 1
-"let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#case_insensitive = 1
-let g:deoplete#sources#ternjs#filetypes = ['jsx', 'javascript.jsx', 'vue', 'js']
-let g:tern#command = ["/home/risus/.yarn/bin/tern"]
-let g:tern#arguments = ["--persistent"]
 
 
 " VIM PRETTIER ------------------------------------------------------
@@ -97,13 +88,6 @@ imap <Leader>p <Esc>:Prettier<CR>
 " VIM JAVASCRIPT ----------------------------------------------------
 " -------------------------------------------------------------------
 let g:javascript_plugin_jsdoc = 1
-
-
-" DEOPLETE ----------------------------------------------------------
-" -------------------------------------------------------------------
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " CTRLP -------------------------------------------------------------
@@ -189,7 +173,7 @@ map <S-c> :qa!<CR>
 
 " Save on ctrl s, exit on ctrl c
 nmap <c-s> :w<CR>
-imap <c-s> <Esc>:w<CR>a
+imap <c-s> <ESC>:w<CR>
 map <c-c> :qa!<CR>
 
 " File specific setups ----------------------------------------------

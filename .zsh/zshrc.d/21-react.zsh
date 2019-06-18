@@ -6,18 +6,14 @@ function startcomponent() {
     echo "$(tr '[:lower:]' '[:upper:]' <<< ${w:0:1})${w:1}"
   }
 
-  getRelPath() {
-    echo "${1}${1}${2}"
-  }
-
 
   local name
   for name in "$@"
   do
     mkdir -p ${name}
 
-    local js="${name}.js"
-    local css="${name}.css"
+    local js="${name}.jsx"
+    local css="${name}.less"
     local index="index.js"
 
     local indexPath="${name}/${index}"
@@ -36,7 +32,7 @@ function startcomponent() {
 
     # at least it looks better(?) the eol
     indexTmpl() {
-      echo "import ${className} from './${js}';"
+      echo "import ${className} from './${name}';"
       echo "export default ${className};"
     }
     indexTmpl >>$indexPath
@@ -45,7 +41,6 @@ function startcomponent() {
       echo "import React from 'react';"
       echo "import './${css}';"
       echo
-      echo
       echo "export default class ${className} extends React.Component {"
       echo "  render() {"
       echo "    return <span>${className} Component</span>"
@@ -53,8 +48,19 @@ function startcomponent() {
       echo "}"
       echo
     }
-    jsStatefulTmpl >>$jsPath
 
-    
+    jsStatelessTmpl() {
+      echo "import React from 'react';"
+      echo "import './${css}';"
+      echo
+      echo "const ${className} = () => {"
+      echo "  return <span>${className} Component</span>"
+      echo "}"
+      echo
+      echo "export default ${className};"
+    }
+
+    jsStatelessTmpl >>$jsPath
+
   done
 }

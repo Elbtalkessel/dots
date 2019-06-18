@@ -6,3 +6,4 @@ if [[ -s "$ZDOTDIR/zprezto/init.zsh" ]]; then
   alias gd='git diff'
   export GREP_COLORS="mt=30;43"
 fi
+

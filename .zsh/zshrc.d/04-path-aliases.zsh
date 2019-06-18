@@ -1,0 +1,5 @@
+alias oprj="cd ~/Projects"
+alias oblu="cd ~/Projects/belmero/bluebin"
+alias oplg="cd ~/Projects/playground"
+alias ores="cd ~/Projects/playground/reactapps/restore"
+alias orct="cd ~/Projects/playground/reactapps"

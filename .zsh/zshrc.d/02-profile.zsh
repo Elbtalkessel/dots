@@ -2,11 +2,6 @@
 
 export LD_LIBRARY_PATH=/usr/lib/
 
-export LOCAL_ETC="${HOME}/.local/etc"
-export LOCAL_BIN="${HOME}/.local/bin"
-export LOCAL_LIB="${HOME}/.local/lib"
-export LOCAL_SRC="${HOME}/.local/src"
-export LOCAL_VAR="${HOME}/.local/var"
 export LOCAL_SH="${HOME}/.local/sh"
 
 export XDG_DATA_HOME="${HOME}/.local/share"
@@ -19,11 +14,6 @@ export POLYBAR_HOME="${XDG_CONFIG_HOME}/polybar"
 export GOPATH="${HOME}/.go"
 export GOBIN="${GOPATH}/bin"
 export GOBIN_SYS="/usr/local/go/bin"
-
-export MUSIC="${HOME}/Music"
-export WALLPAPERS="${HOME}/Pictures"
-export BACKUPS="/mnt/1EACD264ACD235CD/Backups"
-export VAULT="/media/risus/Secure"
 
 export ARCH="x86_64"
 export ARCHFLAGS="-arch x86_64"
@@ -40,7 +30,7 @@ export LESSHISTFILE="${XDG_CACHE_HOME}/.lesshst"
 export GREP_COLORS="mt=30;43"
 
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
-export WINEPREFIX="${XDG_DATA_HOME}/wine"
+export WINEPREFIX="/home/risus/.steam/steam/steamapps/compatdata/8500/pfx"
 export NO_AT_BRIDGE=1
 export QT_STYLE_OVERRIDE="GTK+"
 
@@ -48,7 +38,6 @@ path.add ${LOCAL_SH}
 path.add ${GOBIN}
 path.add ${GOBIN_SYS}
 path.add ${LOCAL_BIN}
-
-export PATH=$PATH
+path.add $(yarn global bin)
 
 export XDG_RUNTIME_DIR=/run/user/`id -u`
