@@ -41,3 +41,11 @@ path.add ${LOCAL_BIN}
 path.add $(yarn global bin)
 
 export XDG_RUNTIME_DIR=/run/user/`id -u`
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Projects
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+export NVM_DIR="${HOME}/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

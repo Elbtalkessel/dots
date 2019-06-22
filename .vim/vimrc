@@ -28,34 +28,17 @@ Plugin 'gmarik/Vundle.vim'
 " Nav
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" HTML, XML
-Plugin 'jiangmiao/auto-pairs'           " Auto pair insert
-Plugin 'alvan/vim-closetag'             " Auto close html tags
-Plugin 'mattn/emmet-vim'
-
-" Javascript
-Plugin 'pangloss/vim-javascript'
-Plugin 'leshill/vim-json'
-
-" Misc
-Plugin 'tpope/vim-fugitive'             " Git wrapper
+" Syntax
+Plugin 'sheerun/vim-polyglot'
+Plugin 'w0rp/ale'
 
 " Appearance
-Plugin 'flazz/vim-colorschemes'         " Colorscheme manager
-Plugin 'joshdick/onedark.vim'           " Colorscheme
+Plugin 'flazz/vim-colorschemes'             " Colorscheme manager
+Plugin 'joshdick/onedark.vim'               " Colorscheme
 Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes' 
+Plugin 'vim-airline/vim-airline-themes'
 
-" GO
-Plugin 'fatih/vim-go'
-
-" JS/JSX
-Plugin 'mxw/vim-jsx'
-
-" HEX COLORS
-Plugin 'chrisbra/Colorizer'
-
-" CODE FORAMTTING
+" Code formatting
 Plugin 'prettier/vim-prettier', {
   \ 'for': [
     \ 'javascript',
@@ -70,24 +53,51 @@ Plugin 'prettier/vim-prettier', {
     \ 'python',
     \ 'html' ] }
 
-" CODE COMPLETION
+" Code completion
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'               " Auto pair insert
+Plugin 'alvan/vim-closetag'                 " Auto close tags
 
+" Snippets
+Plugin 'SirVer/ultisnips'                   " engine
+Plugin 'honza/vim-snippets'
 
+" Misc
+Plugin 'tpope/vim-fugitive'                 " Git wrapper
+Plugin 'ervandew/supertab'                  " For YCM and Ultisnips compat
+Plugin 'chrisbra/Colorizer'                 " hex colors
 
 " /PLUGINS
 call vundle#end()
 filetype indent plugin on
 
 
+" ALE ---------------------------------------------------------------
+" -------------------------------------------------------------------
+let g:ale_fixers = {
+  \ 'javascript': ['eslint']
+\}
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = 'w'
+let g:ale_fix_on_save = 1
+
+" YCM ---------------------------------------------------------------
+" make YCM compatible with UltiSnips (using supertab) ---------------
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+
+" ULTISNIPS ---------------------------------------------------------
+" better key bindings for UltiSnipsExpandTrigger --------------------
+let g:UltiSnipsExpandTrigger="<cr>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
 " VIM PRETTIER ------------------------------------------------------
 " -------------------------------------------------------------------
 imap <Leader>p <Esc>:Prettier<CR>
-
-
-" VIM JAVASCRIPT ----------------------------------------------------
-" -------------------------------------------------------------------
-let g:javascript_plugin_jsdoc = 1
 
 
 " CTRLP -------------------------------------------------------------
@@ -113,6 +123,58 @@ colorscheme onedark
 " VIM-CLOSETAG ------------------------------------------------------
 " -------------------------------------------------------------------
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js"
+
+
+" VIM PRETTIER ------------------------------------------------------
+" -------------------------------------------------------------------
+" max line length that prettier will wrap on
+" Prettier default: 80
+let g:prettier#config#print_width = 120
+
+" number of spaces per indentation level
+" Prettier default: 2
+let g:prettier#config#tab_width = 2
+
+" use tabs over spaces
+" Prettier default: false
+let g:prettier#config#use_tabs = 'false'
+
+" print semicolons
+" Prettier default: true
+let g:prettier#config#semi = 'true'
+
+" single quotes over double quotes
+" Prettier default: false
+let g:prettier#config#single_quote = 'true'
+
+" print spaces between brackets
+" Prettier default: true
+let g:prettier#config#bracket_spacing = 'true'
+
+" put > on the last line instead of new line
+" Prettier default: false
+let g:prettier#config#jsx_bracket_same_line = 'true'
+
+" avoid|always
+" Prettier default: avoid
+let g:prettier#config#arrow_parens = 'always'
+
+" none|es5|all
+" Prettier default: none
+let g:prettier#config#trailing_comma = 'all'
+
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown
+" Prettier default: babylon
+let g:prettier#config#parser = 'flow'
+
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'prefer-file'
+
+" always|never|preserve
+let g:prettier#config#prose_wrap = 'preserve'
+
+" css|strict|ignore
+let g:prettier#config#html_whitespace_sensitivity = 'css'
 
 
 " VIM-AIRLIN --------------------------------------------------------
@@ -163,9 +225,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-"Ctrl-k move to the split above
-"Ctrl-l move to the split to the right
-"Ctrl-h move to the split to the left
+
+" buffer
 map <S-J> :bprev<CR>
 map <S-K> :bnext<CR>
 map <S-q> :bd<CR>
@@ -178,7 +239,7 @@ map <c-c> :qa!<CR>
 
 " File specific setups ----------------------------------------------
 " -------------------------------------------------------------------
-au BufNewFile,BufRead *.*
+au BufNewFile,BufRead *.js,*.html,*.jsx,*.css,*.less
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
