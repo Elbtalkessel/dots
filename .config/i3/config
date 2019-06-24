@@ -102,6 +102,8 @@ bindsym $super+Shift+6 move container to workspace 6
 # sh
 bindsym $super+Shift+a exec $rofi_scripts/audiodevice.sh
 bindsym $super+Shift+w exec $rofi_scripts/wifi.sh
+bindsym $super+Shift+p exec ~/.config/polybar/launch.sh
+
 # apps
 bindsym $super+Shift+b exec $browser
 bindsym $super+Shift+t exec env XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
@@ -210,6 +212,7 @@ for_window [class=TelegramDesktop|Gnome-disks] resize set 540 650
 for_window [class=TeamSpeak*] resize set 540 850
 for_window [class=TelegramDesktop|Gnome-disks] move position center
 for_window [class=TeamSpeak*] move position center
+for_window [class="Yad" title="yad-calendar"] floating enable
 # ---------------------------
 
 
