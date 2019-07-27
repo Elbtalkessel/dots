@@ -75,6 +75,8 @@ bindsym $super+l focus right
 # layout
 bindsym $super+f fullscreen toggle
 bindsym $super+s layout toggle split
+bindsym $super+Down split v
+bindsym $super+Up split h
 # nav
 bindsym $super+1 workspace1
 bindsym $super+2 workspace 2
@@ -85,6 +87,9 @@ bindsym $super+6 workspace 6
 bindsym $super+7 workspace 7
 bindsym $super+8 workspace 8
 bindsym $super+9 workspace 9
+bindsym $super+Left workspace prev
+bindsym $super+Right workspace next
+
 
 # super Shift group
 # nav
@@ -112,10 +117,6 @@ bindsym $super+Shift+c exec code
 bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
 # i3 misc
 bindsym $super+Shift+r restart
-
-# super arrow group
-bindsym $super+Down split v
-bindsym $super+Right split h
 
 # fn group
 bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+

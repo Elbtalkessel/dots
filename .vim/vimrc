@@ -33,6 +33,9 @@ Plugin 'jremmen/vim-ripgrep'
 
 " Syntax
 Plugin 'sheerun/vim-polyglot'
+Plugin 'fatih/vim-go'
+
+" Lint
 Plugin 'w0rp/ale'
 
 " Appearance
@@ -75,6 +78,21 @@ call vundle#end()
 filetype indent plugin on
 
 
+" VIM GO ------------------------------------------------------------
+" -------------------------------------------------------------------
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+
+
 " VIM ripgrep -------------------------------------------------------
 " -------------------------------------------------------------------
 nnoremap <C-G> :Rg 
@@ -90,6 +108,7 @@ let g:ale_sign_error = 'x'
 let g:ale_sign_warning = 'w'
 let g:ale_fix_on_save = 1
 let g:ale_virtualenv_dir_names = []
+let g:airline#extensions#ale#enabled = 1
 
 
 " YCM ---------------------------------------------------------------
@@ -97,13 +116,16 @@ let g:ale_virtualenv_dir_names = []
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+" disable func preview
+set completeopt-=preview
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
 
 " ULTISNIPS ---------------------------------------------------------
 " better key bindings for UltiSnipsExpandTrigger --------------------
-let g:UltiSnipsExpandTrigger="<cr>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"let g:UltiSnipsExpandTrigger="<cr>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 
 " VIM PRETTIER ------------------------------------------------------
@@ -220,12 +242,13 @@ au BufNewFile,BufRead *.js,*.html,*.jsx,*.css,*.less
     \ set autoindent |
     \ set fileformat=unix
 
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.go
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
     \ set textwidth=79 |
-    \ set fileformat=unix
+    \ set fileformat=unix |
+    \ set expandtab
 
 
 " Scripts -----------------------------------------------------------

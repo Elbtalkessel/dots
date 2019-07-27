@@ -13,13 +13,20 @@ stow -R dots
 - compton
 - rofi
 - polybar
-- - at (at module)
-- urxvt
-- - zsh
-- - - zprezto
-- mpd, ncmpcpp
-- neomutt
-- gnome
-- fonts:
-- - SF, icomoon-feather, Ubuntu-C
-- vim
+
+**Polybar modules :**
+at: requires at package
+calendar: requires yad and xdotool
+
+**I3 conf for :**
+gnome, mpd
+
+**Xresources conf for :** 
+urxvt, ncmpcpp
+
+**Misc conf for :**
+mutt, zsh + zprezto
+
+**Fonts :**
+SF, icomoon-feather, Ubuntu-C
+

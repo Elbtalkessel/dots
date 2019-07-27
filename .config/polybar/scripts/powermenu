@@ -7,6 +7,6 @@ MENU="$(rofi -sep "|" -dmenu -i -p 'System' -location 3 -xoffset 0 -yoffset 30 -
 case "$MENU" in
   *Logout) i3-msg exit ;;
   *Suspend) systemctl suspend ;;
-  *Reboot) systemctl reboot ;;
-  *Shutdown) systemctl poweroff
+  *Reboot) init 6 ;;
+  *Poweroff) init 0
 esac

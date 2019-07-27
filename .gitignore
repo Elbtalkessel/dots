@@ -4,3 +4,5 @@
 *.o
 *.log
 .netrwhist
+04-path-aliases.zsh
+timecharm.sh
