@@ -11,12 +11,12 @@ set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
 set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
 set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
 set_from_resource $browser  i3wm.browser  
-set_from_resource $color0   i3wm.color0   #222222
-set_from_resource $color8   i3wm.color8   #333333
-set_from_resource $color1   i3wm.color1   #D81B60
-set_from_resource $color9   i3wm.color9   #CA407E
-set_from_resource $color2   i3wm.color2   #5F676A
-set_from_resource $color10  i3wm.color10  #888888
+set_from_resource $color0   i3wm.bg   #222222
+set_from_resource $color8   i3wm.bg   #333333
+set_from_resource $color1   i3wm.ac   #D81B60
+set_from_resource $color9   i3wm.bi   #CA407E
+set_from_resource $color2   i3wm.be   #5F676A
+set_from_resource $color10  i3wm.bg  #888888
 set_from_resource $color7   i3wm.color7   #E8E2D8
 set_from_resource $color15  i3wm.color15  #D8DEE8
 # I3

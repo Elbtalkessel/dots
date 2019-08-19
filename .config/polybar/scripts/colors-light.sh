@@ -7,6 +7,7 @@ COLORS="$HOME/.Xresources"
 LAUNCH () {
   xrdb $COLORS
   polybar-msg cmd restart
+  i3-msg restart
 }
  
 if  [[ $1 = "-amber" ]]; then
