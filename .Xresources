@@ -5,7 +5,7 @@
 *.SMON: eDP-1-1
 *.TERM: urxvt
 *.MPDS: /home/risus/.local/run/mpd.socket
-*.browser: qutebrowser --enable-webengine-inspector
+*.browser: google-chrome --password-store=ubuntu
 
 ! -----------------------------------------------------------------------------
 ! Color theme

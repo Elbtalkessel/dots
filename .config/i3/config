@@ -10,7 +10,7 @@ set_from_resource $term     i3wm.TERM     urxvt
 set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
 set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
 set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
-set_from_resource $browser  i3wm.browser  "qutebrowser --enable-webengine-inspector"
+set_from_resource $browser  i3wm.browser  
 set_from_resource $color0   i3wm.color0   #222222
 set_from_resource $color8   i3wm.color8   #333333
 set_from_resource $color1   i3wm.color1   #D81B60
@@ -30,11 +30,13 @@ floating_modifier $super
 # ---------------------------
 # AUTOSTART
 # ---------------------------
+
 exec --no-startup-id $sh_scripts/xrndr.sh
 
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
 exec --no-startup-id $sh_scripts/xkbr.sh
+exec --no-startup-id $HOME/.xinitrc
 
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
@@ -65,8 +67,6 @@ exec --no-startup-id $sh_scripts/xrndr.sh
 # super group
 bindsym $super+q kill
 bindsym $alt+F4 kill
-bindsym $super+Return exec $term
-bindsym $super+d exec $rofi_scripts/launcher-alt
 # change focus
 bindsym $super+h focus left
 bindsym $super+j focus down
@@ -104,32 +104,10 @@ bindsym $super+Shift+3 move container to workspace 3
 bindsym $super+Shift+4 move container to workspace 4
 bindsym $super+Shift+5 move container to workspace 5
 bindsym $super+Shift+6 move container to workspace 6
-# sh
-bindsym $super+Shift+a exec $rofi_scripts/audiodevice.sh
-bindsym $super+Shift+w exec $rofi_scripts/wifi.sh
-bindsym $super+Shift+p exec ~/.config/polybar/launch.sh
-
-# apps
-bindsym $super+Shift+b exec $browser
-bindsym $super+Shift+t exec env XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
-bindsym $super+Shift+s exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
-bindsym $super+Shift+c exec code
-bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
 # i3 misc
 bindsym $super+Shift+r restart
 
-# fn group
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 5%-
-bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
-bindsym XF86AudioNext exec mpc --host $mpdhost next
-bindsym XF86AudioPrev exec mpc --host $mpdhost prev
-bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
-bindsym XF86AudioStop exec mpc --host $mpdhost stop
-
-# single and special keys group
-bindsym Print exec $sh_scripts/scr.sh
-bindsym $super+Pause exec $rofi_scripts/powermenu
+bindsym $alt+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 # ---------------------------
 
 
