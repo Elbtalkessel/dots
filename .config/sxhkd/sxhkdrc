@@ -2,11 +2,10 @@ super + Return
 	urxvt
 
 super + d
-	rofi -modi run,drun,ssh -show drun -columns 2 -hide-scrollbar -show-icons
+	rofi -modi run,drun,ssh -show drun -columns 2 -hide-scrollbar -show-icons -drun-icon-theme "la-capitaine-icon-theme"
 
 super + Escape
-	pkill -USR1 -x sxhkd
-
+  runsxhkd.sh
 
 super + shift + a
     $HOME/.config/polybar/scripts/audiodevice.sh
@@ -28,16 +27,15 @@ XF86AudioLowerVolume
 XF86AudioMute 
     amixer -D pulse set Master 1+ toggle
 XF86AudioNext 
-    mpc --host $MPDS next
+    mpc --host $MPD_SOCKET next
 XF86AudioPrev 
-    mpc --host $MPDS prev
+    mpc --host $MPD_SOCKET prev
 XF86AudioPlay 
-    mpc --host $MPDS toggle
+    mpc --host $MPD_SOCKET toggle
 XF86AudioStop 
-    mpc --host $MPDS stop
+    mpc --host $MPD_SOCKET stop
 
 Print 
-    $HOME/.local/sh/scr.sh
+    scr.sh
 super + Pause 
     $XDG_CONFIG_HOME/polybar/scripts/powermenu
-
