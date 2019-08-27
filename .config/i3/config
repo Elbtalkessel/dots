@@ -36,27 +36,22 @@ exec --no-startup-id $sh_scripts/xrndr.sh
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
 exec --no-startup-id $sh_scripts/xkbr.sh
-exec --no-startup-id $HOME/.xinitrc
+exec_always --no-startup-id $sh_scripts/runsxhkd.sh
 
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
 # ---------------------------
 
-# MANAGE MONITORS (need some sort of sh script to generate settings from a template
-# jinja2 templates? Currently it should cover i3, polybar and xrandr settings)
 workspace 1 output $l_mon
-workspace 2 output $c_mon $l_mon
-workspace 3 output $c_mon $l_mon
-workspace 4 output $c_mon $l_mon
-workspace 5 output $c_mon $l_mon
-workspace 6 output $c_mon $l_mon
-workspace 7 output $c_mon $l_mon
-workspace 8 output $c_mon $l_mon
-workspace 9 output $c_mon $l_mon
+workspace 2 output $c_mon
+workspace 3 output $c_mon 
+workspace 4 output $c_mon
+workspace 5 output $c_mon
+workspace 6 output $c_mon
+workspace 7 output $c_mon
+workspace 8 output $c_mon
+workspace 9 output $c_mon
 
-# idk workspace to monitor binding is buggy? It does not work right
-# after startup, sometimes monitor on the left takes 3rd workspace or 1st,
-# annoying, dk how to fix
 exec --no-startup-id $sh_scripts/xrndr.sh
 # ---------------------------
 
@@ -198,9 +193,10 @@ for_window [class="Yad" title="yad-calendar"] floating enable
 # ---------------------------
 # GAPS
 # ---------------------------
-gaps top 0
 gaps inner 5
 new_window none
+smart_gaps on
+smart_borders on
 # ---------------------------
 
 

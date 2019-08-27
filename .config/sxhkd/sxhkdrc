@@ -27,13 +27,13 @@ XF86AudioLowerVolume
 XF86AudioMute 
     amixer -D pulse set Master 1+ toggle
 XF86AudioNext 
-    mpc --host $MPD_SOCKET next
+    mpc --host /home/risus/.local/run/mpd.socket next
 XF86AudioPrev 
-    mpc --host $MPD_SOCKET prev
+    mpc --host /home/risus/.local/run/mpd.socket prev
 XF86AudioPlay 
-    mpc --host $MPD_SOCKET toggle
+    mpc --host /home/risus/.local/run/mpd.socket toggle
 XF86AudioStop 
-    mpc --host $MPD_SOCKET stop
+    mpc --host /home/risus/.local/run/mpd.socket stop
 
 Print 
     scr.sh

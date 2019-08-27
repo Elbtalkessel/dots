@@ -7,8 +7,10 @@ export XDG_RUNTIME_DIR="${HOME}/.local/run"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export MPD_SOCKET="${XDG_RUNTIME_DIR}/mpd.socket"
+export DXVK_CONFIG_FILE="${XDG_CONFIG_HOME}/dxvk/dxvk.conf"
 
 export GOPATH="${HOME}/.go"
+export GOBIN="${HOME}/.local/bin"
 
 export LANG="en_US.UTF-8"
 export EDITOR="nvim"
@@ -29,5 +31,5 @@ path.add "/usr/local/go/bin"
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+source ~/.local/bin/virtualenvwrapper_lazy.sh
 
