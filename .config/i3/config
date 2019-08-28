@@ -180,13 +180,11 @@ mode "move" {
 # ---------------------------
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 2
-for_window [class=Lxappearance|Eog|Gnome-disks|Gpick] floating enable
-for_window [class=libreoffice*|Gimp*|Inkscape|Lxappearance|GParted|discord|TelegramDesktop|TeamSpeak*|Gnome-disks] focus
-for_window [class=TelegramDesktop|Gnome-disks] resize set 540 650
-for_window [class=TeamSpeak*] resize set 540 850
-for_window [class=TelegramDesktop|Gnome-disks] move position center
-for_window [class=TeamSpeak*] move position center
-for_window [class="Yad" title="yad-calendar"] floating enable
+for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris] floating enable
+for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*] focus
+for_window [class=Telegram*|gnome-control-center|Pidgin|Lutris] resize set 540 650
+for_window [class=TeamSpeak*|Steam] resize set 540 850
+for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*] move position center
 # ---------------------------
 
 

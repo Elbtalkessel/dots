@@ -19,6 +19,8 @@ super + shift + t
 super + shift + s
     XDG_CURRENT_DESKTOP=GNOME gnome-control-center
 
+super + shift + c
+    XDG_CURRENT_DESKTOP=GNOME gnome-calendar
 
 XF86AudioRaiseVolume
     amixer -D pulse set Master 5%+

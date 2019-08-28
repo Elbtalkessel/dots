@@ -13,6 +13,7 @@ alias externalip="curl ipinfo.io/ip"
 alias wgdown="sudo wg-quick down wg0"
 alias wgup="sudo wg-quick up wg0"
 alias wgre="wg.down && wg.up"
+alias postg="sudo -u postgres -i"
 
 alias music='ncmpcpp -b $XDG_CONFIG_HOME/ncmpcpp/bindings'
 alias mail='neomutt'
@@ -43,5 +44,8 @@ alias grep="grep -i --color=auto"
 alias egrep="egrep --color=auto"
 
 alias nodejs="node"
+
+
+alias kubectl="KUBECONFIG=~/.kube/kind-config-kind kubectl"
 
 # vim:ft=sh
