@@ -179,11 +179,12 @@ mode "move" {
 # RULES PER WINDOW
 # ---------------------------
 # window rules, you can find the window class using xprop
-for_window [class=".*"] border pixel 2
-for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris] floating enable
+for_window [class=".*"] border pixel 1
+for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*] floating enable
 for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*] focus
-for_window [class=Telegram*|gnome-control-center|Pidgin|Lutris] resize set 540 650
-for_window [class=TeamSpeak*|Steam] resize set 540 850
+for_window [class=Telegram*|gnome-control-center|Pidgin] resize set 540 650
+for_window [class=TeamSpeak*|Steam|Lutris] resize set 540 850
+for_window [class=Lutris|Steam] resize set 720 800
 for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*] move position center
 # ---------------------------
 

@@ -45,12 +45,12 @@
 ! Active Colors
 *bg: #252525
 *fg: #f5f5f5
-*ac: #546e7a
+*ac: #d81b60
 *mf: #f5f5f5
  
 ! Bars
-*bi: #546e7a
-*be: #546e7a
+*bi: #d81b60
+*be: #d81b60
 *bf: #43a047
 *bn: #43a047
 *bm: #fdd835
@@ -304,8 +304,8 @@ URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
 ! Fonts
-URxvt*font: xft:Fira Code:style=Light:size=12
-URxvt*boldFont: xft:Fira Code:style=Medium:size=12
+URxvt*font: xft:Fira Mono:style=Light:size=12
+URxvt*boldFont: xft:Fira Mono:style=Medium:size=12
 
 ! Fix font space
 URxvt*letterSpace: 0
