@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -z `ifconfig | grep "wg0"` ]]; then
-    echo "VPN down"
+    echo ""
 else
-    echo "VPN up"
+    echo ""
 fi

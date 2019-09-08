@@ -303,7 +303,7 @@ URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
 ! Fonts
-URxvt*font: xft:Hurmit Nerd Font Mono:size=12
+URxvt*font: xft:Fira Mono:style=Regular:size=12
 URxvt*boldFont: xft:Fira Mono:style=Medium:size=12
 
 ! Fix font space

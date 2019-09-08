@@ -35,7 +35,6 @@ exec --no-startup-id $sh_scripts/xrndr.sh
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
 exec --no-startup-id $sh_scripts/xkbr.sh
-
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
 # ---------------------------
@@ -96,6 +95,10 @@ bindsym $super+Shift+3 move container to workspace 3
 bindsym $super+Shift+4 move container to workspace 4
 bindsym $super+Shift+5 move container to workspace 5
 bindsym $super+Shift+6 move container to workspace 6
+bindsym $super+Shift+6 move container to workspace 7
+bindsym $super+Shift+6 move container to workspace 8
+bindsym $super+Shift+6 move container to workspace 8
+
 # i3 misc
 bindsym $super+Shift+r restart
 
@@ -121,7 +124,7 @@ bindsym XF86AudioPrev exec mpc --host $mpdhost prev
 bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
 bindsym XF86AudioStop exec mpc --host $mpdhost stop
 
-bindsym $alt+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
+bindsym $alt+Tab workspace back_and_forth
 # ---------------------------
 
 

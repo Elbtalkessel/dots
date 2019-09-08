@@ -406,7 +406,7 @@ def get_selection(eths, aps, vpns, gsms, blues, wwan, others):
         inp = [str(action) for action in all_actions]
     else:
         inp = [('** ' if action.is_active else '   ') + str(action)
-               for action in all_actions]
+               for action in all_actions if str(action)]
     active_lines = [index for index, action in enumerate(all_actions)
                     if action.is_active]
 

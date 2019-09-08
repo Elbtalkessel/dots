@@ -11,7 +11,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%a:</b> %s\n%b"
+    format = "<b>%a</b>\n%s\n%b"
 
     # Sort messages by urgency
     sort = yes
@@ -51,7 +51,7 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+20"
+    geometry = "300x15-30+20"
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -88,13 +88,13 @@
 
     # Draw a line of 'separatpr_height' pixel height between two notifications.
     # Set to 0 to disable
-    separator_height = 2
+    separator_height = 5
 
     # padding between text and separator
-    padding = 8
+    padding = 15
 
     # horizontal padding
-    horizontal_padding = 8
+    horizontal_padding = 10
 
     # Define a color for the separator.
     # possible values are:
@@ -102,17 +102,17 @@
     #  * foreground: use the same color as the foreground
     #  * frame: use the same color as the frame.
     #  * anything else will be interpreted as a X color
-    separator_color = auto
+    separator_color = frame
 
     # print a notification on startup
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = true
+    startup_notification = false
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/google-chrome
 
-    frame_width = 0
-    frame_color = "#000000"
+    frame_width = 1
+    frame_color = "#d81b60"
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
@@ -122,11 +122,11 @@
     timeout = 5
 
 [urgency_normal]
-    background = "#285577"
+    background = "#252525"
     foreground = "#ffffff"
     timeout = 10
 
 [urgency_critical]
-    background = "#900000"
+    background = "#d81b60"
     foreground = "#ffffff"
     timeout = 0
