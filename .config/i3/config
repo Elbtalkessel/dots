@@ -21,7 +21,6 @@ set_from_resource $color15  i3wm.color15  #D8DEE8
 # I3
 set $super Mod4
 set $alt Mod1
-set $mpc mpc --host $mpdhost
 # Press super to move float
 floating_modifier $super
 # ---------------------------
@@ -115,12 +114,12 @@ bindsym $super+Shift+t exec XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
 bindsym $super+Shift+s exec XDG_CURRENT_DESKTOP=GNOME gnome-control-center
 bindsym $super+shift+c exec XDG_CURRENT_DESKTOP=GNOME gnome-calendar
 
-bindsym XF86AudioRaiseVolume exec $mpc volume +5
-bindsym XF86AudioLowerVolume exec $mpc volume -5
-bindsym XF86AudioNext exec mpc --host $HOME/risus/.local/run/mpd.socket next
-bindsym XF86AudioPrev exec $mpc prev
-bindsym XF86AudioPlay exec $mpc toggle
-bindsym XF86AudioStop exec $mpc stop
+bindsym XF86AudioRaiseVolume exec mpc --host $mpdhost volume +5
+bindsym XF86AudioLowerVolume exec mpc --host $mpdhost volume -5
+bindsym XF86AudioNext exec mpc --host $mpdhost next
+bindsym XF86AudioPrev exec mpc --host $mpdhost prev
+bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
+bindsym XF86AudioStop exec mpc --host $mpdhost stop
 
 bindsym $alt+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 # ---------------------------

@@ -9,16 +9,25 @@ window=""
 # Variable passed to rofi
 options="$screen\n$area\n$window"
 
+function _scrot() {
+    local prefix=$(date +"%y_%m_%d_%H_%M_%S")
+    local fname="${prefix}.png"
+    local bdir="~/Pictures/shots"
+
+    scrot $fname -e 'xclip -selection clipboard -t "image/png" < $f && mv $f ~/Pictures/shots' $@
+    notify-send "Shot saved and copied"
+}
+
 chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 1)"
 case $chosen in
     $screen)
-        sleep 1; scrot
+        sleep 1; _scrot
         ;;
     $area)
-        scrot -s
+        _scrot -s
         ;;
     $window)
-        sleep 1; scrot -u
+        sleep 1; _scrot -u
         ;;
 esac
 

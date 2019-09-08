@@ -1,10 +1,13 @@
 #!/bin/bash
 
 rofi_command="rofi -theme themes/mpdmenu.rasi"
+function _mpc() {
+    mpc --host ~/.local/run/mpd.socket $@
+}
 
 ### Options ###
 # Gets the current status of mpd (for us to parse it later on)
-status="$(mpc --host /home/risus/.local/run/mpd.socket status)"
+status="$(_mpc status)"
 # Defines the Play / Pause option content
 if [[ $status == *"[playing]"* ]]; then
     play_pause=""
@@ -38,7 +41,7 @@ previous=""
 options="$previous\n$play_pause\n$stop\n$next\n$tog_repeat\n$tog_random"
 
 # Get the current playing song
-current=$(mpc --host /home/risus/.local/run/mpd.socket current)
+current=$(_mpc current)
 # If mpd isn't running it will return an empty string, we don't want to display that
 if [[ -z "$current" ]]; then
     current="-"
@@ -48,22 +51,22 @@ fi
 chosen="$(echo -e "$options" | $rofi_command -p "$current" -dmenu $active $urgent -selected-row 1)"
 case $chosen in
     $previous)
-        mpc --host /home/risus/.local/run/mpd.socket -q prev
+        _mpc -q prev
         ;;
     $play_pause)
-        mpc --host /home/risus/.local/run/mpd.socket -q toggle
+        _mpc -q toggle
         ;;
     $stop)
-        mpc --host /home/risus/.local/run/mpd.socket -q stop
+        _mpc -q stop
         ;;
     $next)
-        mpc --host /home/risus/.local/run/mpd.socket -q next
+        _mpc -q next
         ;;
     $tog_repeat)
-        mpc --host /home/risus/.local/run/mpd.socket -q repeat
+        _mpc -q repeat
         ;;
     $tog_random)
-        mpc --host /home/risus/.local/run/mpd.socket -q random
+        _mpc -q random
         ;;
 esac
 
