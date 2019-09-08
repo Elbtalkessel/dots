@@ -2,8 +2,7 @@
 # GENERAL
 # ---------------------------
 # path
-set $mpds_fallback $HOME/.local/run/mpd.socket
-set $rofi_scripts  $HOME/.config/polybar/scripts
+set $rofi_scripts  $HOME/.config/rofi/bins
 set $sh_scripts    $HOME/.local/sh
 # .Xresources
 set_from_resource $term     i3wm.TERM     urxvt
@@ -22,6 +21,7 @@ set_from_resource $color15  i3wm.color15  #D8DEE8
 # I3
 set $super Mod4
 set $alt Mod1
+set $mpc mpc --host $mpdhost
 # Press super to move float
 floating_modifier $super
 # ---------------------------
@@ -36,7 +36,6 @@ exec --no-startup-id $sh_scripts/xrndr.sh
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
 exec --no-startup-id $sh_scripts/xkbr.sh
-exec_always --no-startup-id $sh_scripts/runsxhkd.sh
 
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
@@ -85,7 +84,6 @@ bindsym $super+9 workspace 9
 bindsym $super+Left workspace prev
 bindsym $super+Right workspace next
 
-
 # super Shift group
 # nav
 bindsym $super+Shift+h move left
@@ -101,6 +99,28 @@ bindsym $super+Shift+5 move container to workspace 5
 bindsym $super+Shift+6 move container to workspace 6
 # i3 misc
 bindsym $super+Shift+r restart
+
+# non i3
+bindsym $super+Return exec urxvt
+
+bindsym $super+d exec $rofi_scripts/appsmenu
+bindsym $super+Shift+a exec $rofi_scripts/mpdmenu
+bindsym $super+Shift+w exec $rofi_scripts/networkmenu
+bindsym Print exec $rofi_scripts/scrotmenu
+bindsym $super+Pause exec $rofi_scripts/powermenu
+bindsym $super+Shift+i exec $rofi_scripts/i3layoutmenu
+bindsym $super+Shift+v exec $rofi_scripts/nmvpnmenu
+
+bindsym $super+Shift+t exec XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
+bindsym $super+Shift+s exec XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+bindsym $super+shift+c exec XDG_CURRENT_DESKTOP=GNOME gnome-calendar
+
+bindsym XF86AudioRaiseVolume exec $mpc volume +5
+bindsym XF86AudioLowerVolume exec $mpc volume -5
+bindsym XF86AudioNext exec mpc --host $HOME/risus/.local/run/mpd.socket next
+bindsym XF86AudioPrev exec $mpc prev
+bindsym XF86AudioPlay exec $mpc toggle
+bindsym XF86AudioStop exec $mpc stop
 
 bindsym $alt+Tab exec --no-startup-id rofi -modi combi -combi-modi window -show combi
 # ---------------------------

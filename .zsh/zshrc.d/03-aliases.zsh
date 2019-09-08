@@ -9,6 +9,7 @@ alias fep="feh ${HOME}/Pictures"
 alias t="touch"
 
 alias externalip="curl ipinfo.io/ip"
+alias mpc="mpc --host $MPD_SOCKET"
 
 alias wgdown="sudo wg-quick down wg0"
 alias wgup="sudo wg-quick up wg0"

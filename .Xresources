@@ -5,7 +5,6 @@
 *.SMON: eDP-1-1
 *.TERM: urxvt
 *.MPDS: /home/risus/.local/run/mpd.socket
-*.browser: google-chrome --password-store=ubuntu
 
 ! -----------------------------------------------------------------------------
 ! Color theme
@@ -304,7 +303,7 @@ URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
 ! Fonts
-URxvt*font: xft:Fira Mono:style=Light:size=12
+URxvt*font: xft:Hurmit Nerd Font Mono:size=12
 URxvt*boldFont: xft:Fira Mono:style=Medium:size=12
 
 ! Fix font space
