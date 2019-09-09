@@ -95,9 +95,9 @@ bindsym $super+Shift+3 move container to workspace 3
 bindsym $super+Shift+4 move container to workspace 4
 bindsym $super+Shift+5 move container to workspace 5
 bindsym $super+Shift+6 move container to workspace 6
-bindsym $super+Shift+6 move container to workspace 7
-bindsym $super+Shift+6 move container to workspace 8
-bindsym $super+Shift+6 move container to workspace 8
+bindsym $super+Shift+7 move container to workspace 7
+bindsym $super+Shift+8 move container to workspace 8
+bindsym $super+Shift+9 move container to workspace 9
 
 # i3 misc
 bindsym $super+Shift+r restart

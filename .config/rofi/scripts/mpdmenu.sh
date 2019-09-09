@@ -16,15 +16,8 @@ else
 fi
 active=""
 urgent=""
-# Display if repeat mode is on / off
-tog_repeat="凌"
-if [[ $status == *"repeat: on"* ]]; then
-    active="-a 4"
-elif [[ $status == *"repeat: off"* ]]; then
-    urgent="-u 4"
-else
-    tog_repeat=" Parsing error"
-fi
+# Playlist menu
+tog_pl=""
 # Display if random mode is on / off
 tog_random=""
 if [[ $status == *"random: on"* ]]; then
@@ -38,7 +31,7 @@ stop=""
 next=""
 previous=""
 # Variable passed to rofi
-options="$previous\n$play_pause\n$stop\n$next\n$tog_repeat\n$tog_random"
+options="$previous\n$play_pause\n$stop\n$next\n$tog_random\n$tog_pl"
 
 # Get the current playing song
 current=$(_mpc current)
@@ -62,8 +55,8 @@ case $chosen in
     $next)
         _mpc -q next
         ;;
-    $tog_repeat)
-        _mpc -q repeat
+    $tog_pl)
+        ~/.config/rofi/scripts/mpdpl.py
         ;;
     $tog_random)
         _mpc -q random

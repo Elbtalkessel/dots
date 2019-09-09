@@ -1,3 +1,3 @@
 #!/bin/sh
 
-~/.config/rofi/scripts/mpcctl.py
+~/.config/rofi/scripts/mpdmenu.sh
