@@ -6,3 +6,6 @@
 .netrwhist
 04-path-aliases.zsh
 timecharm.sh
+.idea
+.vim/bundle
+.zsh/zprezto/modules
