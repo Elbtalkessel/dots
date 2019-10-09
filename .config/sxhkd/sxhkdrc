@@ -1,0 +1,24 @@
+super + d
+    ${HOME}/.config/rofi/bins/appsmenu
+
+super + shift + a
+    ${HOME}/.config/rofi/bins/mpdmenu
+
+super + shift + w
+    ${HOME}/.config/rofi/bins/networkmenu
+
+Print
+    ${HOME}/.config/rofi/bins/scrotmenu
+
+super + Pause
+    ${HOME}/.config/rofi/bins/powermenu
+
+super + shift + v
+    ${HOME}/.config/rofi/bins/nmvpnmenu
+
+super + shift + t
+    XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
+
+super + shift + s
+    XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+

@@ -9,7 +9,7 @@ set_from_resource $term     i3wm.TERM     urxvt
 set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
 set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
 set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
-set_from_resource $browser  i3wm.browser  
+set_from_resource $browser  i3wm.browser
 set_from_resource $color0   i3wm.bg   #222222
 set_from_resource $color8   i3wm.bg   #333333
 set_from_resource $color1   i3wm.ac   #D81B60
@@ -29,9 +29,7 @@ floating_modifier $super
 # ---------------------------
 # AUTOSTART
 # ---------------------------
-
 exec --no-startup-id $sh_scripts/xrndr.sh
-
 exec --no-startup-id compton -bc --config ~/.config/compton/config
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
 exec --no-startup-id $sh_scripts/xkbr.sh
@@ -41,7 +39,7 @@ exec_always ~/.config/polybar/launch.sh
 
 workspace 1 output $l_mon
 workspace 2 output $c_mon
-workspace 3 output $c_mon 
+workspace 3 output $c_mon
 workspace 4 output $c_mon
 workspace 5 output $c_mon
 workspace 6 output $c_mon
@@ -154,11 +152,11 @@ mode "gaps inner" {
   bindsym plus  gaps inner current plus 5
   bindsym minus gaps inner current minus 5
   bindsym 0     gaps inner current set 0
- 
+
   bindsym Shift+plus  gaps inner all plus 5
   bindsym Shift+minus gaps inner all minus 5
   bindsym Shift+0     gaps inner all set 0
- 
+
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
@@ -166,11 +164,11 @@ mode "gaps outer" {
   bindsym plus  gaps outer current plus 5
   bindsym minus gaps outer current minus 5
   bindsym 0     gaps outer current set 0
- 
+
   bindsym Shift+plus  gaps outer all plus 5
   bindsym Shift+minus gaps outer all minus 5
   bindsym Shift+0     gaps outer all set 0
- 
+
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
@@ -202,12 +200,12 @@ mode "move" {
 # ---------------------------
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 1
-for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*] floating enable
-for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*] focus
+for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*|Nemo] floating enable
+for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*|Nemo] focus
 for_window [class=Telegram*|gnome-control-center|Pidgin] resize set 540 650
 for_window [class=TeamSpeak*|Steam|Lutris] resize set 540 850
-for_window [class=Lutris|Steam] resize set 720 800
-for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*] move position center
+for_window [class=Lutris|Steam|Nemo] resize set 720 800
+for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*|Nemo] move position center
 # ---------------------------
 
 

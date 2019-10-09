@@ -56,3 +56,13 @@ proc.who() {
     echo "PID copied"
   fi
 }
+
+
+mo() {
+    sudo mkdir -p "/mnt/$1"
+    sudo mount "/dev/$1" "/mnt/$1"
+}
+
+um() {
+    sudo umount "/mnt/$1"
+}

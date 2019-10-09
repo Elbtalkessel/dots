@@ -7,5 +7,6 @@
 04-path-aliases.zsh
 timecharm.sh
 .idea
-.vim/bundle
+.vim
+!.vim/vimrc
 .zsh/zprezto/modules
