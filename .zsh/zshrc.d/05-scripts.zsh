@@ -40,20 +40,21 @@ icons() {
 }
 
 
-proc.who() {
+proc() {
   if [ -z $1 ]
   then
-    echo "usage: proc.who <user|pid|command>"
+    echo "usage: proc <user|pid|command>"
     return 2
   fi
   local fsc=`echo $1 | cut -c1-1`
   local rsc=`echo $1 | cut -c2-`
-  local val=$(ps -eo user,pid,comm | grep -P "^USER|[$fsc]$rsc" --color=none)
+  local val=$(ps -eo user,pid,comm | grep -P -i "^USER|[$fsc]$rsc" --color=none)
   echo $val
   if [ "$2" = '-c' ]
   then
-    echo $val | awk "NR==2" | grep -Po "\d+" | xclip -selection clipboard
-    echo "PID copied"
+    local pid=`echo $val | awk "NR==2" | grep -Po "\d+" | tr -d '\n'`
+    echo pid | xclip -selection clipboard
+    echo "$pid copied"
   fi
 }
 
