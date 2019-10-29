@@ -66,3 +66,16 @@ mo() {
 um() {
     sudo umount "/mnt/$1"
 }
+
+prj() {
+    local PROJECT_DIR=~/Projects
+    if [ -z $1 ]; then
+        ls $PROJECT_DIR
+    else
+        local TARGET=`ls $PROJECT_DIR | grep $1`
+        workon $TARGET || true
+        cd "${PROJECT_DIR}/${TARGET}"
+    fi
+}
+compctl -W ~/Projects -/ prj
+ 
