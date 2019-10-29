@@ -29,10 +29,9 @@ floating_modifier $super
 # ---------------------------
 # AUTOSTART
 # ---------------------------
-exec --no-startup-id $sh_scripts/xrndr.sh
 exec --no-startup-id compton -bc --config ~/.config/compton/config
-exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings &
-exec --no-startup-id $sh_scripts/xkbr.sh
+# will execute all *sh under $sh_scripts/autostart.d/
+exec --no-startup-id $sh_scripts/autostart.sh
 exec_always ~/.fehbg
 exec_always ~/.config/polybar/launch.sh
 # ---------------------------
@@ -47,7 +46,7 @@ workspace 7 output $c_mon
 workspace 8 output $c_mon
 workspace 9 output $c_mon
 
-exec --no-startup-id $sh_scripts/xrndr.sh
+exec --no-startup-id $sh_scripts/autostart.d/set-mon.sh
 # ---------------------------
 
 
@@ -200,12 +199,12 @@ mode "move" {
 # ---------------------------
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 1
-for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*|Nemo] floating enable
-for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*|Nemo] focus
-for_window [class=Telegram*|gnome-control-center|Pidgin] resize set 540 650
-for_window [class=TeamSpeak*|Steam|Lutris] resize set 540 850
-for_window [class=Lutris|Steam|Nemo] resize set 720 800
-for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*|Nemo] move position center
+#for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*|Nemo] floating enable
+#for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*|Nemo] focus
+#for_window [class=Telegram*|gnome-control-center|Pidgin] resize set 540 650
+#for_window [class=TeamSpeak*|Steam|Lutris] resize set 540 850
+#for_window [class=Lutris|Steam|Nemo] resize set 720 800
+#for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*|Nemo] move position center
 # ---------------------------
 
 

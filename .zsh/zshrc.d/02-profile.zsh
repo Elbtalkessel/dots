@@ -22,11 +22,14 @@ export LESS="-g -i -M -R -S -w -K -z-4 --lesskey-file=${XDG_CONFIG_HOME}/lesskey
 export LESSHISTFILE="${XDG_CACHE_HOME}/.lesshst"
 export GREP_COLORS="mt=30;43"
 
+export BROWSER=/usr/bin/qutebrowser
+
 export KUBECONFIG=~/.kube/kind-config-kind
 
 path.add "${HOME}/.local/bin"
 path.add "${HOME}/.yarn/bin"
 path.add "${HOME}/.local/sh"
+path.add "/snap/bin"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs

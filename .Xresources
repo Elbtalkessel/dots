@@ -316,8 +316,7 @@ URxvt.scrollBar:            false
 ! Perl extensions
 URxvt.perl-ext-common:      default,matcher
 URxvt.matcher.button:       1
-URxvt.urlLauncher:          qutebrowser --enable-webengine-inspector
-
+URxvt.url-launcher:         qutebrowser
 ! Cursor
 URxvt.cursorBlink:          true
 URxvt.cursorColor:          #657b83
@@ -362,5 +361,5 @@ URxvt.keysym.Control-Up:     \033[1;5A
 URxvt.keysym.Control-Down:   \033[1;5B
 URxvt.keysym.Control-Left:   \033[1;5D
 URxvt.keysym.Control-Right:  \033[1;5C
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-v: eval:paste_clipboard
+URxvt.keysym.Control-c: eval:selection_to_clipboard

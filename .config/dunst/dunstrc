@@ -79,7 +79,7 @@
 
     # should a notification popped up from history be sticky or
     # timeout as if it would normally do.
-    sticky_history = yes
+    sticky_history = no
 
     # The height of a single line. If the height is smaller than the font height,
     # it will get raised to the font height.
@@ -88,10 +88,10 @@
 
     # Draw a line of 'separatpr_height' pixel height between two notifications.
     # Set to 0 to disable
-    separator_height = 5
+    separator_height = 0
 
     # padding between text and separator
-    padding = 15
+    padding = 10
 
     # horizontal padding
     horizontal_padding = 10
@@ -102,7 +102,7 @@
     #  * foreground: use the same color as the foreground
     #  * frame: use the same color as the frame.
     #  * anything else will be interpreted as a X color
-    separator_color = frame
+    separator_color = auto 
 
     # print a notification on startup
     # This is mainly for error detection, since dbus (re-)starts dunst
@@ -111,7 +111,7 @@
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/google-chrome
 
-    frame_width = 1
+    frame_width = 0
     frame_color = "#d81b60"
 
 [urgency_low]
@@ -130,3 +130,8 @@
     background = "#d81b60"
     foreground = "#ffffff"
     timeout = 0
+
+[bot_ignore]
+    summary = "*42cc@khavr.com*"
+    format = ""
+    history_ignore = yes
