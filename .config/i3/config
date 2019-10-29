@@ -198,13 +198,25 @@ mode "move" {
 # RULES PER WINDOW
 # ---------------------------
 # window rules, you can find the window class using xprop
+# options:
+#   floation enable
+#   focus
+#   move container to workspace N
+#   resize set X Y
+#   border pixel N
+#   move position
 for_window [class=".*"] border pixel 1
-#for_window [class=Eog|Gpick|discord|Telegram*|Pidgin|gnome-*|Gnome-*|baobab|Baobab|Steam|Lutris|TeamSpeak*|Nemo] floating enable
-#for_window [class=libreoffice*|Gimp*|Inkscape|GParted|discord|Telegram*|TeamSpeak*|Gnome-disks|Pidgin|gnome-*|Gnome-*|Nemo] focus
-#for_window [class=Telegram*|gnome-control-center|Pidgin] resize set 540 650
-#for_window [class=TeamSpeak*|Steam|Lutris] resize set 540 850
-#for_window [class=Lutris|Steam|Nemo] resize set 720 800
-#for_window [class=TelegramDesktop|Gnome-*|discord|Pidgin|TeamSpeak*|Nemo] move position center
+for_window [class="evelauncher.exe"] floating enable
+
+for_window [class="exefile.exe"] move container to workspace 7
+
+for_window [class="TeamSpeak*"] floating enable
+for_window [class="TeamSpeak*"] resize set 540 860
+for_window [class="TeamSpeak*"] move container to workspace 1
+
+for_window [class=discord|Telegram*|Pidgin] move container to workspace 9
+
+for_window [class=Nemo] floating enable
 # ---------------------------
 
 
