@@ -10,3 +10,4 @@ timecharm.sh
 .vim
 !.vim/vimrc
 .zsh/zprezto/modules
+*.zcompdump.*

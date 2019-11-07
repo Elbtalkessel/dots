@@ -59,13 +59,36 @@ proc() {
 }
 
 
+strjoin() {
+    IFS=$1
+    shift
+    echo "$*"
+}
+
+
 mo() {
-    sudo mkdir -p "/mnt/$1"
-    sudo mount "/dev/$1" "/mnt/$1"
+    local mount_to=`strjoin / $MOUNT_ROOT $@`
+    mkdir -p "$mount_to"
+
+    if [ $# -eq 2 ]; then
+        local mount_from="$1:/$2/"
+        sshfs $mount_from $mount_to
+    else
+        local mount_from="/dev/$1"
+        sudo mount $mount_from $mount_to
+    fi
+    
+    if [ $? -ne 0 ]; then
+        rm -rv "$MOUNT_ROOT/$1"
+        printf 'tried: '
+    fi
+    echo "$mount_from -> $mount_to"
 }
 
 um() {
-    sudo umount "/mnt/$1"
+    local umount_from=`strjoin / $MOUNT_ROOT $@`
+    sudo umount $umount_from
+    rm -r "$MOUNT_ROOT/$1"
 }
 
 prj() {

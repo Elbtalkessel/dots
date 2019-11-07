@@ -26,6 +26,8 @@ export BROWSER=/usr/bin/qutebrowser
 
 export KUBECONFIG=~/.kube/kind-config-kind
 
+export MOUNT_ROOT=~/mnt
+
 path.add "${HOME}/.local/bin"
 path.add "${HOME}/.yarn/bin"
 path.add "${HOME}/.local/sh"
