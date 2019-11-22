@@ -97,9 +97,26 @@ prj() {
         ls $PROJECT_DIR
     else
         local TARGET=`ls $PROJECT_DIR | grep $1`
-        workon $TARGET || true
+        workon $TARGET
+        local workonexit=$?
         cd "${PROJECT_DIR}/${TARGET}"
+        if [ $workonexit -ne 0 ]; then
+            source .venv/bin/activate || true
+        fi
     fi
 }
 compctl -W ~/Projects -/ prj
  
+
+copy() {
+    printf $1 | xclip -selection clipboard
+    notify-send "Clipboard: $1"
+}
+
+rzathura() {
+    zathura "$@" &
+}
+
+rfeh() {
+    feh "$@" &
+}
