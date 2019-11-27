@@ -2,25 +2,25 @@
 
 import os
 
+BASE_DIR = os.path.expanduser('~')
+VIDEO_DIR = os.path.join(BASE_DIR, 'Videos')
+PL_DIR = os.path.join(BASE_DIR, 'VideoPlaylists')
+PL_EXT = '.vpl'
 
 VIDEO_FORMATS = ('mp4',)
-VIDEO_DIR = 'Videos'
-VIDEO_PAR = os.path.expanduser('~')
-WORK_DIR = os.path.join(VIDEO_PAR, VIDEO_DIR)
-PL_DIR = os.path.join(WORK_DIR, 'pl')
 
 
 def main():
-    for current_dir, sub_dirs, files in os.walk(WORK_DIR):
+    for current_dir, sub_dirs, files in os.walk(VIDEO_DIR):
         video_files = [f for f in files if f.endswith(VIDEO_FORMATS)]
         video_paths = [
-            os.path.join(WORK_DIR, current_dir, v) + '\n' for v in video_files
+            os.path.join(VIDEO_DIR, current_dir, v) + '\n' for v in video_files
         ]
         if video_paths:
-            pl_file = os.path.basename(current_dir) + '.pl'
+            pl_file = os.path.basename(current_dir) + PL_EXT
             parent_dir = os.path.dirname(current_dir)
             rel_parent_dir_path = parent_dir.replace('./', '', 1)
-            rel_parent_dir_path = rel_parent_dir_path.replace(WORK_DIR + '/', '')
+            rel_parent_dir_path = rel_parent_dir_path.replace(VIDEO_DIR + '/', '')
             pl_dir = os.path.join(PL_DIR, rel_parent_dir_path)
             try:
                 os.makedirs(pl_dir)

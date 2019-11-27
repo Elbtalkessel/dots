@@ -32,6 +32,7 @@ path.add "${HOME}/.local/bin"
 path.add "${HOME}/.yarn/bin"
 path.add "${HOME}/.local/sh"
 path.add "/snap/bin"
+path.add "$GOROOT/bin"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs

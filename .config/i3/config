@@ -206,18 +206,8 @@ mode "move" {
 #   border pixel N
 #   move position
 for_window [class=".*"] border pixel 1
-#for_window [class="evelauncher.exe"] floating enable
-
-#for_window [class="exefile.exe"] move container to workspace 7
-
-#for_window [class="TeamSpeak*"] floating enable
-#for_window [class="TeamSpeak*"] resize set 540 860
-#for_window [class="TeamSpeak*"] move container to workspace 1
-
-for_window [class=discord|Telegram*|Pidgin] move container to workspace 9
-
+for_window [class=discord|Telegram*|Pidgin|Slack] move container to workspace 9
 for_window [class="jetbrains-pycharm"] move container to workspace 3
-
 for_window [class="qutebrowser"] move container to workspace 2
 # ---------------------------
 

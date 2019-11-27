@@ -1,4 +1,4 @@
-**Installing with Stow :**
+**Install :**
 ```sh
 sudo apt install stow
 cd ~
@@ -13,19 +13,7 @@ stow -R dots
 - compton
 - rofi
 - polybar
-
-**Polybar modules :**
-at: requires at package
-calendar: requires yad and xdotool
-
-**I3 conf for :**
-gnome, mpd
-
-**Xresources conf for :** 
-urxvt, ncmpcpp
-
-**Misc conf for :**
-mutt, zsh + zprezto
+- gnome (soft)
 
 **Fonts :**
 SF, icomoon-feather, Ubuntu-C
