@@ -356,9 +356,14 @@ URxvt*color14 : #66D9EF
 URxvt*color7  : #D3D7CF
 URxvt*color15 : #EEEEEC
 
-! Keys
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 URxvt.keysym.Control-Up:     \033[1;5A
 URxvt.keysym.Control-Down:   \033[1;5B
 URxvt.keysym.Control-Left:   \033[1;5D
 URxvt.keysym.Control-Right:  \033[1;5C
-URxvt.keysym.Control-v: eval:paste_clipboard

@@ -64,6 +64,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'               " Auto pair insert
 Plugin 'alvan/vim-closetag'                 " Auto close tags
 
+" Python
+Plugin 'jmcantrell/vim-virtualenv'
+
 " Snippets
 Plugin 'SirVer/ultisnips'                   " engine
 Plugin 'honza/vim-snippets'

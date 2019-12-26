@@ -18,6 +18,7 @@ set_from_resource $color2   i3wm.be   #5F676A
 set_from_resource $color10  i3wm.bg  #888888
 set_from_resource $color7   i3wm.color7   #E8E2D8
 set_from_resource $color15  i3wm.color15  #D8DEE8
+font Fira Sans Book:style=Book,Regular 15
 # I3
 set $super Mod4
 set $alt Mod1
@@ -109,6 +110,7 @@ bindsym Print exec $rofi_scripts/scrotmenu
 bindsym $super+Pause exec $rofi_scripts/powermenu
 bindsym $super+Shift+i exec $rofi_scripts/i3layoutmenu
 bindsym $super+Shift+v exec $rofi_scripts/nmvpnmenu
+
 
 bindsym $super+Shift+t exec XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
 bindsym $super+Shift+s exec XDG_CURRENT_DESKTOP=GNOME gnome-control-center
@@ -209,6 +211,12 @@ for_window [class=".*"] border pixel 1
 for_window [class=discord|Telegram*|Pidgin|Slack] move container to workspace 9
 for_window [class="jetbrains-pycharm"] move container to workspace 3
 for_window [class="qutebrowser"] move container to workspace 2
+for_window [class="Google-chrome"] move container to workspace 1
+for_window [class="evelauncher*"] move container to workspace 1
+for_window [class="evelauncher*"] floating enable
+for_window [class="exefile*"] move container to workspace 4
+for_window [class="Firefox"] move container to workspace 1
+
 # ---------------------------
 
 
@@ -225,11 +233,10 @@ smart_borders on
 # ---------------------------
 # COLORS
 # ---------------------------
-# colour of             border    backgro     text       indicat   child_b
-client.focused          $color1   #000000     $color15   #000000   $color1
-client.focused_inactive $color0   $color2     $color15   $color2   $color2
-client.unfocused        $color8   $color0     $color10   $color0   $color8
-client.urgent           $color0   $color9     $color15   $color1   $color0
-client.placeholder      #000000   $color0     $color15   $color0   #000000
-client.background       #000000
+# colour of             border    backgro     text      indicat   child_b
+client.focused          $color8   $color8     $color2   $color2   $color2
+client.focused_inactive $color0   $color2     #010101   $color2   $color2
+client.unfocused        $color8   $color0     #595959   $color0   $color8
+client.urgent           $color0   $color9     $color15  $color1   $color0
+client.placeholder      #000000   $color0     $color15  $color0   #000000
 # ---------------------------

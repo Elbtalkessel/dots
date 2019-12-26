@@ -12,9 +12,8 @@ options="$screen\n$area\n$window"
 function _scrot() {
     local prefix=$(date +"%y_%m_%d_%H_%M_%S")
     local fname="${prefix}.png"
-    local bdir="~/Pictures/shots"
 
-    scrot $fname -e 'xclip -selection clipboard -t "image/png" < $f && mv $f ~/Pictures/shots' $@
+    scrot $fname -e 'xclip -selection clipboard -t "image/png" < $f && mv $f ~/Pictures/Screenshots/' $@
     notify-send "Shot saved and copied"
 }
 
