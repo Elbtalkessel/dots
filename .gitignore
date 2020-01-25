@@ -12,3 +12,4 @@ timecharm.sh
 .zsh/zprezto/modules
 *.zcompdump.*
 *.db
+*zwc*

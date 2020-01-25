@@ -3,3 +3,4 @@ zprezto/*
 .zcompcache
 .zhistory
 *.zwc
+.zim

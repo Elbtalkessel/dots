@@ -3,6 +3,6 @@
 rofi \
     -no-lazy-grab\
     -show drun\
-    -modi file-browser,run,ssh\
+    -modi run,ssh\
     -theme themes/appsmenu.rasi
 

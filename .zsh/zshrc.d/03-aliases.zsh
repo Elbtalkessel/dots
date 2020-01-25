@@ -19,6 +19,7 @@ alias postg="sudo -u postgres -i"
 alias music='ncmpcpp -b $XDG_CONFIG_HOME/ncmpcpp/bindings'
 alias mail='neomutt'
 alias jabber='profanity'
+alias kimai='kimai2-cmd'
 
 alias dfh="df -h | grep -P \"^File|sd\" --color=never | awk 'NR<2{print \$0;next}{print \$0 | \"sort\"}'"
 

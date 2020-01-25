@@ -37,5 +37,5 @@ path.add "$GOROOT/bin"
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
-source ~/.local/bin/virtualenvwrapper_lazy.sh
+source `which virtualenvwrapper_lazy.sh`
 

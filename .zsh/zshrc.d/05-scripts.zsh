@@ -88,7 +88,6 @@ mo() {
 um() {
     local umount_from=`strjoin / $MOUNT_ROOT $@`
     sudo umount $umount_from
-    rm -r "$MOUNT_ROOT/$1"
 }
 
 prj() {
@@ -97,12 +96,8 @@ prj() {
         ls $PROJECT_DIR
     else
         local TARGET=`ls $PROJECT_DIR | grep $1`
-        workon $TARGET
-        local workonexit=$?
         cd "${PROJECT_DIR}/${TARGET}"
-        if [ $workonexit -ne 0 ]; then
-            source .venv/bin/activate || true
-        fi
+        workon $TARGET || source .venv/bin/activate || source env/bin/activate || true
     fi
 }
 compctl -W ~/Projects -/ prj
@@ -119,4 +114,17 @@ rzathura() {
 
 rfeh() {
     feh "$@" &
+}
+
+togglemem() {
+    local min=67584
+    local max=1048576
+	local current=`cat /proc/sys/vm/min_free_kbytes`
+	if [ "$current" -gt "$min" ]; then
+		local target=$min
+	else
+		local target=$max
+	fi
+	echo "Set $target kb of free vm mem"
+    echo $target | sudo tee /proc/sys/vm/min_free_kbytes
 }
