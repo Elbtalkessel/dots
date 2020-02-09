@@ -31,14 +31,6 @@ colors() {
 }
 
 
-icons() {
-  case "$1" in
-    *copy) printf "\u$2" | xclip ;;
-    *icomoon) xfd -fa "icomoon\-feather" & ;;
-    *) echo "icons <copy|icomoon>"
-  esac
-}
-
 
 proc() {
   if [ -z $1 ]
@@ -101,30 +93,48 @@ prj() {
     fi
 }
 compctl -W ~/Projects -/ prj
- 
 
-copy() {
-    printf $1 | xclip -selection clipboard
-    notify-send "Clipboard: $1"
+lfcd() {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
 }
 
-rzathura() {
-    zathura "$@" &
+pipi() {
+    pip install $@
+    required=$(echo $@ | tr ' ' '\n' | grep -vP '^-')
+    # better grep from output of previous command but whatever, next time
+    installed=$(pip freeze | grep $required)
+    while IFS= read -r req
+    do
+        # req package name
+        # ins package name and its version
+        ins=$(echo "$installed" | grep "$req")
+        echo $ins $req
+        if [ ! -z "$ins" ]; then
+            # is required package already in requirements?
+            grep -q "$req" requirements.txt
+            if [ $? -eq 1 ]; then
+                echo "add $ins"
+                echo "$ins" >> requirements.txt
+            else
+                echo "upd $ins"
+                sed -i "s,$req.*,$ins," requirements.txt
+            fi
+        fi
+    done <<< "$required"
 }
 
-rfeh() {
-    feh "$@" &
-}
-
-togglemem() {
-    local min=67584
-    local max=1048576
-	local current=`cat /proc/sys/vm/min_free_kbytes`
-	if [ "$current" -gt "$min" ]; then
-		local target=$min
-	else
-		local target=$max
-	fi
-	echo "Set $target kb of free vm mem"
-    echo $target | sudo tee /proc/sys/vm/min_free_kbytes
+pipr() {
+    pip uninstall $@
+    pkgs=$(echo $@ | tr ' ' '\n' | grep -vP '^-')
+    while IFS= read -r line
+    do
+        echo "del $line"
+        sed -i "s,$line.*,," requirements.txt
+    done <<< "$pkgs"
 }

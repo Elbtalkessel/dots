@@ -13,8 +13,8 @@ function _scrot() {
     local prefix=$(date +"%y_%m_%d_%H_%M_%S")
     local fname="${prefix}.png"
 
-    scrot $fname -e 'xclip -selection clipboard -t "image/png" < $f && mv $f ~/Pictures/Screenshots/' $@
-    notify-send "Shot saved and copied"
+    scrot $fname -e 'xclip -selection clipboard -t "image/png" < $f' $@
+    mv $fname ~/Pictures/Screenshots
 }
 
 chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 1)"
@@ -26,7 +26,7 @@ case $chosen in
         _scrot -s
         ;;
     $window)
-        sleep 1; _scrot -u
+        sleep 10; _scrot -u
         ;;
 esac
 

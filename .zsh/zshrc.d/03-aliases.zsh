@@ -21,7 +21,7 @@ alias mail='neomutt'
 alias jabber='profanity'
 alias kimai='kimai2-cmd'
 
-alias dfh="df -h | grep -P \"^File|sd\" --color=never | awk 'NR<2{print \$0;next}{print \$0 | \"sort\"}'"
+alias dfh="df -T -h -x tmpfs -x devtmpfs"
 
 alias vim="nvim"
 alias vi="nvim"
@@ -47,8 +47,11 @@ alias egrep="egrep --color=auto"
 alias grip="grep -i --color=auto"
 
 alias nodejs="node"
+alias yarn="yarnpkg"
 
 alias rcopy="rsync -rv --info=progress2 --ignore-existing"
 alias mosrv="sudo sshfs -o allow_other,IdentityFile=~/.ssh/id_rsa risus@192.168.43.232:/ /mnt/server"
+
+alias chromeclean="rm -rf ~/.cache/google-chrome && rm -rf ~/.config/google-chrome && google-chrome"
 
 # vim:ft=sh

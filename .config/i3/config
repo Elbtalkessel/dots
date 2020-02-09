@@ -5,19 +5,19 @@
 set $rofi_scripts  $HOME/.config/rofi/bins
 set $sh_scripts    $HOME/.local/sh
 # .Xresources
-set_from_resource $term     i3wm.TERM     urxvt
-set_from_resource $mpdhost  i3wm.MPDS     $HOME/.local/run/mpd.socket
-set_from_resource $c_mon    i3wm.PMON     "HDMI-1-2"
-set_from_resource $l_mon    i3wm.SMON     "eDP-1-1"
+set_from_resource $term     i3wm.TERM       urxvt
+set_from_resource $mpdhost  i3wm.MPDS       $HOME/.local/run/mpd.socket
+set_from_resource $c_mon    i3wm.PMON       "HDMI-1-2"
+set_from_resource $l_mon    i3wm.SMON       "eDP-1-1"
 set_from_resource $browser  i3wm.browser
-set_from_resource $color0   i3wm.bg   #222222
-set_from_resource $color8   i3wm.bg   #333333
-set_from_resource $color1   i3wm.ac   #D81B60
-set_from_resource $color9   i3wm.bi   #CA407E
-set_from_resource $color2   i3wm.be   #5F676A
-set_from_resource $color10  i3wm.bg  #888888
-set_from_resource $color7   i3wm.color7   #E8E2D8
-set_from_resource $color15  i3wm.color15  #D8DEE8
+set_from_resource $color0   i3wm.bg         #222222
+set_from_resource $color8   i3wm.bg         #333333
+set_from_resource $color1   i3wm.ac         #D81B60
+set_from_resource $color9   i3wm.bi         #CA407E
+set_from_resource $color2   i3wm.be         #5F676A
+set_from_resource $color10  i3wm.bg         #888888
+set_from_resource $color7   i3wm.color7     #E8E2D8
+set_from_resource $color15  i3wm.color15    #D8DEE8
 font Fira Sans Book:style=Book,Regular 15
 # I3
 set $super Mod4
@@ -35,7 +35,7 @@ exec_always ~/.config/polybar/launch.sh
 exec --no-startup-id $sh_scripts/autostart.sh
 
 # ---------------------------
-workspace 1 output $l_mon
+workspace 1 output $c_mon
 workspace 2 output $c_mon
 workspace 3 output $c_mon
 workspace 4 output $c_mon
@@ -44,8 +44,6 @@ workspace 6 output $c_mon
 workspace 7 output $c_mon
 workspace 8 output $c_mon
 workspace 9 output $c_mon
-
-exec --no-startup-id $sh_scripts/autostart.d/set-mon.sh
 # ---------------------------
 
 
@@ -63,8 +61,8 @@ bindsym $super+l focus right
 # layout
 bindsym $super+f fullscreen toggle
 bindsym $super+s layout toggle split
-bindsym $super+Down split v
-bindsym $super+Up split h
+bindsym $super+v split v
+bindsym $super+b split h
 # nav
 bindsym $super+1 workspace1
 bindsym $super+2 workspace 2
@@ -104,7 +102,6 @@ bindsym $super+Return exec urxvt
 bindsym $super+d exec $rofi_scripts/appsmenu
 bindsym $super+Shift+a exec $rofi_scripts/mpdmenu
 bindsym $super+Shift+w exec $rofi_scripts/networkmenu
-bindsym Print exec $rofi_scripts/scrotmenu
 bindsym $super+Pause exec $rofi_scripts/powermenu
 bindsym $super+Shift+i exec $rofi_scripts/i3layoutmenu
 bindsym $super+Shift+v exec $rofi_scripts/nmvpnmenu
@@ -204,13 +201,10 @@ mode "move" {
 #   border pixel N
 #   move position
 for_window [class=".*"] border pixel 1
-for_window [class=discord|Telegram*|Pidgin|Slack] move container to workspace 9
-for_window [class="jetbrains-pycharm"] move container to workspace 3
-for_window [class="qutebrowser"] move container to workspace 2
-for_window [class="evelauncher*"] move container to workspace 1
+for_window [class=discord|Telegram*|Slack] move container to workspace 3
+for_window [class="jetbrains-pycharm"] move container to workspace 2
+for_window [class="qutebrowser"] move container to workspace 1
 for_window [class="evelauncher*"] floating enable
-for_window [class="exefile*"] move container to workspace 4
-for_window [class="Firefox"] move container to workspace 1
 
 # ---------------------------
 

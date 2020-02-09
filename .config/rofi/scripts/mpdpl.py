@@ -33,7 +33,8 @@ def draw_tlist():
     if track > 1:
         tlist.rstrip()
         tlist = "[SOURCES]\n[CONTROL]\n" + tlist
-        rofi = Popen([*ROFI, "-selected-row", "1", "-i", "-dmenu", "-p", current], stdout=PIPE, stdin=PIPE)
+        rofi = Popen([*ROFI, "-selected-row", "1", "-i", "-dmenu", "-p",
+                      current, '-columns', '4'], stdout=PIPE, stdin=PIPE)
         tmp = rofi.communicate(input=tlist.encode())[0].decode().rstrip()
         tmp = tmp[tmp.find("[") + 1:tmp.find("]")]
     if not tmp:
@@ -47,7 +48,7 @@ def draw_slist():
     playlists = check_output([*MPC, "lsplaylists"])
     for line in playlists.splitlines():
         commands = commands + line.decode() + "\n"
-    rofi = Popen([*ROFI, "-i", "-dmenu", "-p", current], stdout=PIPE, stdin=PIPE)
+    rofi = Popen([*ROFI, "-i", "-dmenu", "-p", current, '-columns', '4'], stdout=PIPE, stdin=PIPE)
     tmp = rofi.communicate(input=commands.encode())[0].decode().rstrip()
     if not tmp:
         sys.exit(0)

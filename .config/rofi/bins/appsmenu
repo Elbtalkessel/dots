@@ -1,8 +1,3 @@
 #!/bin/sh
 
-rofi \
-    -no-lazy-grab\
-    -show drun\
-    -modi run,ssh\
-    -theme themes/appsmenu.rasi
-
+~/.config/rofi/scripts/appsmenu.sh
