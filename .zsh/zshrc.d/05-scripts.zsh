@@ -82,6 +82,7 @@ um() {
     sudo umount $umount_from
 }
 
+
 prj() {
     local PROJECT_DIR=~/Projects
     if [ -z $1 ]; then
@@ -89,10 +90,52 @@ prj() {
     else
         local TARGET=`ls $PROJECT_DIR | grep $1`
         cd "${PROJECT_DIR}/${TARGET}"
-        workon $TARGET || source .venv/bin/activate || source env/bin/activate || true
+        deactivate > /dev/null 2>&1
+        if [ -d ~/.virtualenvs/$TARGET ]; then
+            workon $TARGET
+        elif [ -f Pipfile ]; then
+            pipenv shell
+        fi
     fi
 }
 compctl -W ~/Projects -/ prj
+
+
+arcprj() {
+    local PROJECT_DIR=~/Projects
+    local PROJECT_ARC="${PROJECT_DIR}/archives"
+    if [ -z $1 ]; then
+        ls $PROJECT_DIR
+    else
+        local TARGET=`ls -d $PROJECT_DIR/* | grep $1`
+        tar -zcvf "${PROJECT_ARC}/${TARGET}.tgz" "${TARGET}"
+        rm -rf "${TARGET}"
+    fi
+}
+compctl -W ~/Projects -/ arcprj
+
+
+darcprj() {
+    local PROJECT_DIR=~/Projects
+    local PROJECT_ARC="${PROJECT_DIR}/archives"
+    if [ -z $1 ]; then
+        ls $PROJECT_ARC
+    else
+        local TARGET=`ls -d $PROJECT_ARC/* | grep $1`
+        if [ ! -z "${TARGET}" ]; then
+            PROJECT_NAME=$(basename -- "$TARGET")
+            PROJECT_NAME="${PROJECT_NAME%.*}"
+            echo "tar -zxvf ${TARGET} ${PROJECT_DIR}/${PROJECT_NAME}"
+            echo "rm -rf ${TARGET}"
+
+            tar -zxvf "${TARGET}" "${PROJECT_DIR}/${TARGET}"
+
+            rm -rf "${TARGET}"
+        fi
+    fi
+}
+
+
 
 lfcd() {
     tmp="$(mktemp)"
@@ -137,4 +180,11 @@ pipr() {
         echo "del $line"
         sed -i "s,$line.*,," requirements.txt
     done <<< "$pkgs"
+}
+
+vboxsetresolution() {
+    MACHINE=$(vboxmanage list vms | grep -o '".*"' | grep -o '[^"]*' | dmenu)
+    RESOLUTION=$(xrandr | grep -o "connected primary [^+]*" | grep -Po '[[:digit:]]*x[[:digit:]]*')
+    vboxmanage setextradata "$MACHINE" VBoxInternal2/EfiGraphicsResolution $RESOLUTION
+    echo "Set $MACHINE to $RESOLUTION"
 }

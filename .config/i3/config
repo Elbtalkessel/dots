@@ -5,7 +5,7 @@
 set $rofi_scripts  $HOME/.config/rofi/bins
 set $sh_scripts    $HOME/.local/sh
 # .Xresources
-set_from_resource $term     i3wm.TERM       urxvt
+set_from_resource $term     i3wm.TERM       alacritty
 set_from_resource $mpdhost  i3wm.MPDS       $HOME/.local/run/mpd.socket
 set_from_resource $c_mon    i3wm.PMON       "HDMI-1-2"
 set_from_resource $l_mon    i3wm.SMON       "eDP-1-1"
@@ -53,17 +53,12 @@ workspace 9 output $c_mon
 # super group
 bindsym $super+q kill
 bindsym $alt+F4 kill
-# change focus
-bindsym $super+h focus left
-bindsym $super+j focus down
-bindsym $super+k focus up
-bindsym $super+l focus right
 # layout
 bindsym $super+f fullscreen toggle
 bindsym $super+s layout toggle split
 bindsym $super+v split v
 bindsym $super+b split h
-# nav
+# go to workspace move to workspace
 bindsym $super+1 workspace1
 bindsym $super+2 workspace 2
 bindsym $super+3 workspace 3
@@ -73,16 +68,8 @@ bindsym $super+6 workspace 6
 bindsym $super+7 workspace 7
 bindsym $super+8 workspace 8
 bindsym $super+9 workspace 9
-bindsym $super+Left workspace prev
-bindsym $super+Right workspace next
-
-# super Shift group
-# nav
-bindsym $super+Shift+h move left
-bindsym $super+Shift+j move down
-bindsym $super+Shift+k move up
-bindsym $super+Shift+l move right
-# move focused container to workspace
+bindsym $super+l workspace prev
+bindsym $super+h workspace next
 bindsym $super+Shift+1 move container to workspace 1
 bindsym $super+Shift+2 move container to workspace 2
 bindsym $super+Shift+3 move container to workspace 3
@@ -92,30 +79,18 @@ bindsym $super+Shift+6 move container to workspace 6
 bindsym $super+Shift+7 move container to workspace 7
 bindsym $super+Shift+8 move container to workspace 8
 bindsym $super+Shift+9 move container to workspace 9
-
+# GAMERS RISE UP
+bindsym $super+d focus left
+bindsym $super+s focus down
+bindsym $super+w focus up
+bindsym $super+a focus right
+bindsym $super+Shift+d move left
+bindsym $super+Shift+s move down
+bindsym $super+Shift+w move up
+bindsym $super+Shift+a move right
+# move focused container to workspace
 # i3 misc
 bindsym $super+Shift+r restart
-
-# non i3
-bindsym $super+Return exec urxvt
-
-bindsym $super+d exec $rofi_scripts/appsmenu
-bindsym $super+Shift+a exec $rofi_scripts/mpdmenu
-bindsym $super+Shift+w exec $rofi_scripts/networkmenu
-bindsym $super+Pause exec $rofi_scripts/powermenu
-bindsym $super+Shift+i exec $rofi_scripts/i3layoutmenu
-bindsym $super+Shift+v exec $rofi_scripts/nmvpnmenu
-
-
-bindsym $super+Shift+s exec XDG_CURRENT_DESKTOP=GNOME gnome-control-center
-
-#bindsym XF86AudioRaiseVolume exec mpc --host $mpdhost volume +5
-#bindsym XF86AudioLowerVolume exec mpc --host $mpdhost volume -5
-bindsym XF86AudioNext exec mpc --host $mpdhost next
-bindsym XF86AudioPrev exec mpc --host $mpdhost prev
-bindsym XF86AudioPlay exec mpc --host $mpdhost toggle
-bindsym XF86AudioStop exec mpc --host $mpdhost stop
-
 bindsym $alt+Tab workspace back_and_forth
 # ---------------------------
 
@@ -201,10 +176,11 @@ mode "move" {
 #   border pixel N
 #   move position
 for_window [class=".*"] border pixel 1
-for_window [class=discord|Telegram*|Slack] move container to workspace 3
 for_window [class="jetbrains-pycharm"] move container to workspace 2
 for_window [class="qutebrowser"] move container to workspace 1
 for_window [class="evelauncher*"] floating enable
+for_window [class="exefile.exe"] move container to workspace 4
+for_window [class="Wine"] move container to workspace 4
 
 # ---------------------------
 

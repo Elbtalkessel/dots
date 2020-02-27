@@ -34,6 +34,14 @@ path.add "${HOME}/.local/sh"
 path.add "/snap/bin"
 path.add "$GOROOT/bin"
 
+# android things
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export ANDROID_HOME=$HOME/Android/Sdk
+path.add "$ANDROID_HOME/emulator"
+path.add "$ANDROID_HOME/tools"
+path.add "$ANDROID_HOME/tools/bin"
+path.add "$ANDROID_HOME/platform-tools"
+
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects

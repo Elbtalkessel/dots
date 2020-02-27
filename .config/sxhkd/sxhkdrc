@@ -1,24 +1,30 @@
-super + d
+alt + d
     ${HOME}/.config/rofi/bins/appsmenu
 
-super + shift + a
+alt + a
     ${HOME}/.config/rofi/bins/mpdmenu
-
-super + shift + w
-    ${HOME}/.config/rofi/bins/networkmenu
-
-Print
-    ${HOME}/.config/rofi/bins/scrotmenu
 
 super + Pause
     ${HOME}/.config/rofi/bins/powermenu
-
-super + shift + v
-    ${HOME}/.config/rofi/bins/nmvpnmenu
 
 super + shift + t
     XDG_CURRENT_DESKTOP=GNOME gnome-tweaks
 
 super + shift + s
     XDG_CURRENT_DESKTOP=GNOME gnome-control-center
+
+super + Return
+    urxvt
+
+super + Escape
+    pkill -USR1 -x sxhkd
+
+XF86AudioNext
+    mpc --host $HOME/.local/run/mpd.socket next
+XF86AudioPrev 
+    mpc --host $HOME/.local/run/mpd.socket prev
+XF86AudioPlay 
+    mpc --host $HOME/.local/run/mpd.socket toggle
+XF86AudioStop 
+    mpc --host $HOME/.local/run/mpd.socket stop
 

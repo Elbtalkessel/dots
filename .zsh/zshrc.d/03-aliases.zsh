@@ -3,6 +3,7 @@
 alias quit="exit"
 
 alias S="sudo systemctl"
+alias Su="systemctl --user"
 alias s="sudo"
 alias .="source"
 alias fep="feh ${HOME}/Pictures"
