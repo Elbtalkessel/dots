@@ -55,7 +55,6 @@ bindsym $super+q kill
 bindsym $alt+F4 kill
 # layout
 bindsym $super+f fullscreen toggle
-bindsym $super+s layout toggle split
 bindsym $super+v split v
 bindsym $super+b split h
 # go to workspace move to workspace
@@ -80,10 +79,10 @@ bindsym $super+Shift+7 move container to workspace 7
 bindsym $super+Shift+8 move container to workspace 8
 bindsym $super+Shift+9 move container to workspace 9
 # GAMERS RISE UP
-bindsym $super+d focus left
+bindsym $super+a focus left
 bindsym $super+s focus down
 bindsym $super+w focus up
-bindsym $super+a focus right
+bindsym $super+d focus right
 bindsym $super+Shift+d move left
 bindsym $super+Shift+s move down
 bindsym $super+Shift+w move up
@@ -92,6 +91,12 @@ bindsym $super+Shift+a move right
 # i3 misc
 bindsym $super+Shift+r restart
 bindsym $alt+Tab workspace back_and_forth
+
+# I can't make it work using sxhkd
+bindsym XF86AudioNext exec mpc --host $HOME/.local/run/mpd.socket next
+bindsym XF86AudioPrev exec mpc --host $HOME/.local/run/mpd.socket prev
+bindsym XF86AudioPlay exec mpc --host $HOME/.local/run/mpd.socket toggle
+bindsym XF86AudioStop exec mpc --host $HOME/.local/run/mpd.socket stop
 # ---------------------------
 
 
@@ -108,39 +113,6 @@ mode "resize" {
   bindsym Return mode "default"
 }
 bindsym $super+r mode "resize"
-
-# GAPS MODE
-bindsym $super+Shift+g mode "gaps"
-mode "gaps" {
-  bindsym o mode "gaps outer"
-  bindsym i mode "gaps inner"
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-mode "gaps inner" {
-  bindsym plus  gaps inner current plus 5
-  bindsym minus gaps inner current minus 5
-  bindsym 0     gaps inner current set 0
-
-  bindsym Shift+plus  gaps inner all plus 5
-  bindsym Shift+minus gaps inner all minus 5
-  bindsym Shift+0     gaps inner all set 0
-
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-mode "gaps outer" {
-  bindsym plus  gaps outer current plus 5
-  bindsym minus gaps outer current minus 5
-  bindsym 0     gaps outer current set 0
-
-  bindsym Shift+plus  gaps outer all plus 5
-  bindsym Shift+minus gaps outer all minus 5
-  bindsym Shift+0     gaps outer all set 0
-
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
 
 # FLOATING WINDOW MOVE MODE
 bindsym $super+m mode "move" focus floating
@@ -175,7 +147,7 @@ mode "move" {
 #   resize set X Y
 #   border pixel N
 #   move position
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 2
 for_window [class="jetbrains-pycharm"] move container to workspace 2
 for_window [class="qutebrowser"] move container to workspace 1
 for_window [class="evelauncher*"] floating enable

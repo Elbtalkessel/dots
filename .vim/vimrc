@@ -29,14 +29,9 @@ Plugin 'gmarik/Vundle.vim'
 
 " Nav
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jremmen/vim-ripgrep'
 
 " Syntax
 Plugin 'sheerun/vim-polyglot'
-Plugin 'fatih/vim-go'
-
-" Lint
-Plugin 'w0rp/ale'
 
 " Appearance
 Plugin 'flazz/vim-colorschemes'             " Colorscheme manager
@@ -44,108 +39,17 @@ Plugin 'joshdick/onedark.vim'               " Colorscheme
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-" Code formatting
-Plugin 'prettier/vim-prettier', {
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'python',
-    \ 'html' ] }
-
 " Code completion
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'               " Auto pair insert
 Plugin 'alvan/vim-closetag'                 " Auto close tags
 
-" Python
-Plugin 'jmcantrell/vim-virtualenv'
-
-" Snippets
-Plugin 'SirVer/ultisnips'                   " engine
-Plugin 'honza/vim-snippets'
-
 " Misc
 Plugin 'tpope/vim-fugitive'                 " Git wrapper
-Plugin 'ervandew/supertab'                  " For YCM and Ultisnips compat
 Plugin 'chrisbra/Colorizer'                 " hex colors
 
 " /PLUGINS
 call vundle#end()
 filetype indent plugin on
-
-
-" VIM GO ------------------------------------------------------------
-" -------------------------------------------------------------------
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_auto_sameids = 1
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
-
-
-" VIM ripgrep -------------------------------------------------------
-" -------------------------------------------------------------------
-nnoremap <C-G> :Rg 
-
-
-" ALE ---------------------------------------------------------------
-" -------------------------------------------------------------------
-let g:ale_fixers = {
-  \ 'javascript': ['eslint']
-\}
-let g:ale_linters = {'python': ['flake8']}
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = 'w'
-let g:ale_fix_on_save = 1
-let g:ale_virtualenv_dir_names = []
-let g:airline#extensions#ale#enabled = 1
-
-
-" YCM ---------------------------------------------------------------
-" make YCM compatible with UltiSnips (using supertab) ---------------
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" disable func preview
-set completeopt-=preview
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-
-
-" ULTISNIPS ---------------------------------------------------------
-" better key bindings for UltiSnipsExpandTrigger --------------------
-"let g:UltiSnipsExpandTrigger="<cr>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-
-" VIM PRETTIER ------------------------------------------------------
-" -------------------------------------------------------------------
-imap <Leader>p <Esc>:Prettier<CR>
-" max line length that prettier will wrap on
-" Prettier default: 80
-let g:prettier#config#print_width = 120
-" number of spaces per indentation level
-" Prettier default: 2
-let g:prettier#config#tab_width = 2
-" none|es5|all
-" Prettier default: none
-let g:prettier#config#trailing_comma = 'all'
-" css|strict|ignore
-let g:prettier#config#html_whitespace_sensitivity = 'css'
-
 
 
 " CTRLP -------------------------------------------------------------
