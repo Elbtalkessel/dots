@@ -18,7 +18,6 @@ set_from_resource $color2   i3wm.be         #5F676A
 set_from_resource $color10  i3wm.bg         #888888
 set_from_resource $color7   i3wm.color7     #E8E2D8
 set_from_resource $color15  i3wm.color15    #D8DEE8
-font Fira Sans Book:style=Book,Regular 15
 # I3
 set $super Mod4
 set $alt Mod1
@@ -68,7 +67,7 @@ bindsym $super+7 workspace 7
 bindsym $super+8 workspace 8
 bindsym $super+9 workspace 9
 bindsym $super+l workspace prev
-bindsym $super+h workspace next
+bindsym $super+Tab workspace next
 bindsym $super+Shift+1 move container to workspace 1
 bindsym $super+Shift+2 move container to workspace 2
 bindsym $super+Shift+3 move container to workspace 3
@@ -92,11 +91,20 @@ bindsym $super+Shift+a move right
 bindsym $super+Shift+r restart
 bindsym $alt+Tab workspace back_and_forth
 
-# I can't make it work using sxhkd
+# other
 bindsym XF86AudioNext exec mpc --host $HOME/.local/run/mpd.socket next
 bindsym XF86AudioPrev exec mpc --host $HOME/.local/run/mpd.socket prev
 bindsym XF86AudioPlay exec mpc --host $HOME/.local/run/mpd.socket toggle
 bindsym XF86AudioStop exec mpc --host $HOME/.local/run/mpd.socket stop
+
+# pactl list and try every single profile :/
+bindsym $alt+shift+1 exec pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo
+bindsym $alt+shift+2 exec pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:hdmi-stereo-extra1
+
+bindsym $super+x exec $rofi_scripts/appsmenu
+bindsym $super+z exec $rofi_scripts/mpdmenu
+bindsym $super+Pause exec $rofi_scripts/powermenu
+bindsym $super+Return exec $term
 # ---------------------------
 
 
@@ -150,6 +158,7 @@ mode "move" {
 for_window [class=".*"] border pixel 2
 for_window [class="jetbrains-pycharm"] move container to workspace 2
 for_window [class="qutebrowser"] move container to workspace 1
+for_window [class="brave-browser"] move container to workspace 1
 for_window [class="evelauncher*"] floating enable
 for_window [class="exefile.exe"] move container to workspace 4
 for_window [class="Wine"] move container to workspace 4

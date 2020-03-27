@@ -48,7 +48,6 @@ alias egrep="egrep --color=auto"
 alias grip="grep -i --color=auto"
 
 alias nodejs="node"
-alias yarn="yarnpkg"
 
 alias rcopy="rsync -rv --info=progress2 --ignore-existing"
 alias mosrv="sudo sshfs -o allow_other,IdentityFile=~/.ssh/id_rsa risus@192.168.43.232:/ /mnt/server"

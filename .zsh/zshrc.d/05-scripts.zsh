@@ -14,7 +14,7 @@ iptobin() {
     echo $ip
 }
 
-
+# lazy nvm load because I don't need it in my shell always
 nvm() {
     if [ -z "$NVM_DIR" ]; then
         export NVM_DIR="${HOME}/.nvm"
@@ -107,9 +107,14 @@ arcprj() {
     if [ -z $1 ]; then
         ls $PROJECT_DIR
     else
-        local TARGET=`ls -d $PROJECT_DIR/* | grep $1`
-        tar -zcvf "${PROJECT_ARC}/${TARGET}.tgz" "${TARGET}"
-        rm -rf "${TARGET}"
+        tar -zcvf "${PROJECT_ARC}/$1.tgz" "$1"
+        if [ $? -eq 0 ]; then
+            echo "DELETE $PROJECT_DIR/$1? (y/n)"
+            read del
+            if [ "$del" = "y" ]; then
+                rm -vrf "$PROJECT_DIR/$1"
+            fi
+        fi
     fi
 }
 compctl -W ~/Projects -/ arcprj
@@ -121,16 +126,11 @@ darcprj() {
     if [ -z $1 ]; then
         ls $PROJECT_ARC
     else
-        local TARGET=`ls -d $PROJECT_ARC/* | grep $1`
-        if [ ! -z "${TARGET}" ]; then
-            PROJECT_NAME=$(basename -- "$TARGET")
-            PROJECT_NAME="${PROJECT_NAME%.*}"
-            echo "tar -zxvf ${TARGET} ${PROJECT_DIR}/${PROJECT_NAME}"
-            echo "rm -rf ${TARGET}"
-
-            tar -zxvf "${TARGET}" "${PROJECT_DIR}/${TARGET}"
-
-            rm -rf "${TARGET}"
+        if [ ! -z "$1" ]; then
+            tar -zxvf "$PROJECT_ARC/$1.tgz" "${PROJECT_DIR}/$1"
+            if [ $? -eq 0 ]; then
+                rm -rf "${TARGET}"
+            fi
         fi
     fi
 }
@@ -188,3 +188,20 @@ vboxsetresolution() {
     vboxmanage setextradata "$MACHINE" VBoxInternal2/EfiGraphicsResolution $RESOLUTION
     echo "Set $MACHINE to $RESOLUTION"
 }
+
+
+
+countdown()
+(
+  IFS=:
+  set -- $*
+  secs=$(( ${1#0} ))
+  while [ $secs -gt 0 ]
+  do
+    sleep 1 &
+    printf "\rT-Minus %02d" $((secs%60))
+    secs=$(( $secs - 1 ))
+    wait
+  done
+  printf "\rTakeoff 00\n"
+)
